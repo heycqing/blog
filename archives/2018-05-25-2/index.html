@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>java-ssh框架简述 | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="这是一张展示图片，以下是正文(点击标题进入正文)">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="java-ssh框架简述">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>java-ssh框架简述</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2018-05-25-2/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-05-25T02:09:26.000Z">
+          2018-05-25
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/static/images/2018-05-25-2/1.png" alt=""> </p>
+<blockquote>
+<p>这是一张展示图片，以下是正文(点击标题进入正文)</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="java-ssh框架简述"><a href="#java-ssh框架简述" class="headerlink" title="java-ssh框架简述"></a>java-ssh框架简述</h2><h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>大三下学期的项目作业是基于java（并不是java原生写的）做一个java web的一个项目， 基于mvc架构的ssh架构.</p>
+<h3 id="1-简单说一下mvc-和-ssh"><a href="#1-简单说一下mvc-和-ssh" class="headerlink" title="1.简单说一下mvc 和 ssh"></a>1.简单说一下mvc 和 ssh</h3><h4 id="1-1所谓的mvc架构简单来说就是主要有3部分组成"><a href="#1-1所谓的mvc架构简单来说就是主要有3部分组成" class="headerlink" title="1.1所谓的mvc架构简单来说就是主要有3部分组成"></a>1.1所谓的mvc架构简单来说就是主要有3部分组成</h4><pre><code>即 M （模型层），C （控制层），V （视图层），
+</code></pre><p> <strong>模型层</strong>主要是数据层的管理和处理；<br> <strong>控制层</strong>作为中间层链接模型层和视图层，主要是逻辑关系的处理；<br> <strong>视图层</strong>主要是作为表现层的展示和处理，主要是页面的展示，<br><strong>模糊狭窄意义上</strong>来说就是前端展示； </p>
+<h4 id="1-2提及的java语言编写的ssh框架，"><a href="#1-2提及的java语言编写的ssh框架，" class="headerlink" title="1.2提及的java语言编写的ssh框架，"></a>1.2提及的java语言编写的ssh框架，</h4><p>即 <code>Spring , Struts ,Hibernate</code> 3个框架结合在一起的大框架；<br>它们本身就是一个框架，只是3个框架一起组成一个框架集，就像零件一样组合，这就需要一个作为中间链接 的框架，那就是spring;<br>同时java编写的类很多，很多都是互相依赖，耦合性很高，但是基于面向对象思想，需要有一个容器来整合耦合性很高的类，装在一起，方便去调用，这时，就需要spring。 </p>
+<p><strong>Spring</strong>是一个轻量级的控制反转（IoC）和面向切面（AOP）的容器框架，作为中间层链接struct 和 Hibernate ；基于IOC，主要是负责查找、定位、创建和管理对象及对象之间的依赖关系，进行依赖注入和依赖查找；基于AOP理论，spring主要是降低Struct和hibernate中有关逻辑关系的耦合性，方便就针对某个功能进行编码，（Spring作为一个容器，所有类放在spring，以后调用某个类就很方便在spring中进行依赖查找调用和依赖注入） </p>
+<p><strong>Struts</strong>本身也是一个mvc结构的框架，是整个ssh框架的基础框架，内部主要是jsp 和 Servlet</p>
+<blockquote>
+<p>Servlet：（作为来自 Web 浏览器或其他 HTTP 客户端的请求和 HTTP 服务器上的数据库或应用程序之间的中间层。）（简单来说就是web服务器的一个java类，处理请求和数据）；</p>
+</blockquote>
+<p>在ssh框架中，采用的<code>Struts2.x</code>,主要是struts1.x结合web worker，主要是采用了截拦器来处理用户请求。<br><strong>关于前端截拦器可以使用service worker，同样的作用用于截拦用户请求，不过是发生在前端</strong></p>
+<p><strong>Hibernate</strong> 是对应着ssh框架的持久层（数据层），本身是对JDBC封装的对象关系映射框架，主要是对数据库进行操作。 </p>
+<h4 id="1-3大致对应表格如下：-不是严格意义上的分类，只是便于记忆和理解，（参考上面所述）"><a href="#1-3大致对应表格如下：-不是严格意义上的分类，只是便于记忆和理解，（参考上面所述）" class="headerlink" title="1.3大致对应表格如下： 不是严格意义上的分类，只是便于记忆和理解，（参考上面所述）"></a>1.3大致对应表格如下： 不是严格意义上的分类，只是便于记忆和理解，（参考上面所述）</h4><p>| ssh | mvc | 简述 |  :——-: | :–: | :———–: |<br>| spring | C | 控制层 |<br>| struts | V/C | 视图层/控制层 |<br>| hibernate | M | 模型层 | </p>
+<h3 id="2-关于相关的ssh项目结构列表："><a href="#2-关于相关的ssh项目结构列表：" class="headerlink" title="2.关于相关的ssh项目结构列表："></a>2.关于相关的ssh项目结构列表：</h3><p>对ssh框架理解后，还需要对ssh整个项目框架做一个大概的了解才方便进行编写：<br>拿一个demo来讲； </p>
+<h4 id="2-1大致上的项目结构："><a href="#2-1大致上的项目结构：" class="headerlink" title="2.1大致上的项目结构："></a>2.1大致上的项目结构：</h4><p><img src="/static/images/2018-05-25-2/1.png" alt=""><br>初学时建议在<code>src 目录中 com文件夹</code><br>拉取完整的<code>jar</code>包，熟悉后可以拉取对应的<code>jar</code>包; </p>
+<h4 id="2-1细节的项目结构："><a href="#2-1细节的项目结构：" class="headerlink" title="2.1细节的项目结构："></a>2.1细节的项目结构：</h4><p><img src="/static/images/2018-05-25-2/2.png" alt=""> </p>
+<p>assets文件图如下：<br><img src="/static/images/2018-05-25-2/3.png" alt=""> </p>
+<h3 id="3-一点建议；"><a href="#3-一点建议；" class="headerlink" title="3 一点建议；"></a>3 一点建议；</h3><p>编写java代码可以在本地使用vs code 或者 sublime text 等编辑器中进行，不要太依赖IDE编辑器；<br>犹如我之前是使用webstom 的，后来就改用vs code 编辑器，一样有着ide的高亮语法，可以自己去配置自己想要的插件，做一款实际能用上的属于自己的编辑器；<br>感觉使用IDE编辑器的同学都很偏爱IDE自带的服务器，可以一次性运行，个人建议可以自己尝试搭建本地服务器，在运行在本地服务器，可以自己感受到搭建服务器的过程，多一项技能也不错吧。就是个人觉得，在初学的时候，不要太过依赖于使用IDE，在能完成基础任务和学习到应该要学的知识时，逐步放开IDE去，使用编辑器去编辑代码，虽然过程会遇到很多麻烦，但是也是一个学习的过程。 </p>
+<p>参考链接：<a href="https://blog.csdn.net/xiaodanjava/article/details/32124409" target="_blank" rel="noopener">https://blog.csdn.net/xiaodanjava/article/details/32124409</a><br>参考链接：<a href="https://blog.csdn.net/u014484743/article/details/53197351" target="_blank" rel="noopener">https://blog.csdn.net/u014484743/article/details/53197351</a><br>参考链接：「反转控制」<a href="https://baike.baidu.com/item/%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC/1158025?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC/1158025?fr=aladdin</a><br>参考链接：「Servlet」<a href="http://www.runoob.com/servlet/servlet-intro.html" target="_blank" rel="noopener">http://www.runoob.com/servlet/servlet-intro.html</a>  </p>
+<p> <img src="http://wusiqing.com/wp-content/uploads/2018/05/WechatIMG132-2.jpeg" alt=""></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/java/">java</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/java/">java</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

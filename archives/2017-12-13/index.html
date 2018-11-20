@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>ftp-sync 插件实现本地客户端和服务端文件同步 | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="ftp-sync 插件实现本地客户端和服务端文件同步">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>ftp-sync 插件实现本地客户端和服务端文件同步</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2017-12-13/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-12-12T17:47:28.000Z">
+          2017-12-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/static/images/2017-12-13/title.png" alt=""><br><a id="more"></a></p>
+<h1 id="Vs-code-中Ftp-sync实现本地和服务器文件同步"><a href="#Vs-code-中Ftp-sync实现本地和服务器文件同步" class="headerlink" title="Vs code 中Ftp-sync实现本地和服务器文件同步"></a>Vs code 中Ftp-sync实现本地和服务器文件同步</h1><h2 id="使用ftp-sync-的需求："><a href="#使用ftp-sync-的需求：" class="headerlink" title="使用ftp-sync 的需求："></a>使用ftp-sync 的需求：</h2><pre><code>为什么要使用ftp-sync插件来实现本地和服务器文件同步？
+
+小Q 我在做项目的时候，经常要在本地写代码，调试完上传服务器查看真机效果，如果有错误返回本地继续写代码，调试完，继续上传服务器。。。。。可以看一下下图，不断重复上述操作，对于一名前端人员来说更是繁琐；
+</code></pre><p><img src="http://wusiqing.com/wp-content/uploads/2017/12/WechatIMG4.jpeg" alt=""> 况且，我还是用FileZilla这款软件来把本地上传到服务器，完全手动，而且还要先手动连接远程服务器，在网速比较不好的情况下，是比较蛋疼的，亲身体验过。  </p>
+<h2 id="回归正题："><a href="#回归正题：" class="headerlink" title="回归正题："></a>回归正题：</h2><h3 id="1-安装ftp-sync"><a href="#1-安装ftp-sync" class="headerlink" title="1   安装ftp-sync:"></a>1   安装ftp-sync:</h3><ul>
+<li>使用<code>vs code</code>的同学，都可以在扩展模块那下载安装ftp-sync;实在找不到，就如下图：</li>
+<li>window：</li>
+<li>安装方法1. <code>Ctrl+Shift+P</code> 输入 <code>ext install</code> [插件关键字/名称]</li>
+<li>安装方法2. <code>Ctrl+Shift+P (或F1)</code> 输入<code>Extensions</code>, 选中 <code>Install Extension</code>然后输入插件名称/关键字</li>
+<li>mac:</li>
+<li><code>command+⬆️  +p</code> 即可进入命令行；</li>
+</ul>
+<h2 id="2-使用ftp-sync"><a href="#2-使用ftp-sync" class="headerlink" title="2  使用ftp-sync:"></a>2  使用ftp-sync:</h2><h4 id="1-第一步，初始化"><a href="#1-第一步，初始化" class="headerlink" title="1.第一步，初始化"></a>1.第一步，初始化</h4><p>输入命令：<code>Ftp-sync:Init</code> 会出现如下的文件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="string">"remotePath"</span>: <span class="string">"/var/data/"</span>,</span><br><span class="line"> <span class="string">"host"</span>: <span class="string">"192.168.0.78"</span>,</span><br><span class="line"> <span class="string">"username"</span>: <span class="string">"shoukii"</span>,</span><br><span class="line"> <span class="string">"password"</span>: <span class="string">"shouadmin"</span>,</span><br><span class="line"> <span class="string">"port"</span>: <span class="number">22</span>,</span><br><span class="line"> <span class="string">"protocol"</span>: <span class="string">"sftp"</span>,</span><br><span class="line"> <span class="string">"uploadOnSave"</span>: <span class="literal">true</span>,</span><br><span class="line"> <span class="string">"passive"</span>: <span class="literal">false</span>,</span><br><span class="line"> <span class="string">"debug"</span>: <span class="literal">false</span>,</span><br><span class="line"> <span class="string">"privateKeyPath"</span>: <span class="literal">null</span>,</span><br><span class="line"> <span class="string">"ignore"</span>: \[</span><br><span class="line"> <span class="string">"\\\.vscode"</span>,</span><br><span class="line"> <span class="string">"\\\.git"</span>,</span><br><span class="line"> <span class="string">"\\\.idea"</span></span><br><span class="line"> \]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这个文件里需要配置好自己的服务器的<code>host username password port</code>基本信息，主要用来连接远程服务器  </p>
+<h4 id="2-第二步："><a href="#2-第二步：" class="headerlink" title="2 第二步："></a>2 第二步：</h4><p>把本地文件推送到远程服务器 使用命令 ：<code>Ftp-sync: Sync Local to Remote</code> 基本上到这里就可以实现本地文件到远程服务器的同步， 在这里，只要在本地保存了，就会立即执行ftp-sync 的命令，自动保存文件到远程服务器。   </p>
+<h4 id="3-题外："><a href="#3-题外：" class="headerlink" title="3 题外："></a>3 题外：</h4><p>也可以直接从服务器远程拉取文件到本地； 只要使用命令：<code>Ftp-sync: Sync Remote to Local</code></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/vs-code/">vs code</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

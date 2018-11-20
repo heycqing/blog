@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>同步调用回调函数VS异步调用回调函数 | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="一、简述。这也是在研究js运行机制拓展开，也算是对以前知识的一个review和总结。">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="同步调用回调函数VS异步调用回调函数">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>同步调用回调函数VS异步调用回调函数</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2018-07-01/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-06-30T18:27:14.000Z">
+          2018-07-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="一、简述。"><a href="#一、简述。" class="headerlink" title="一、简述。"></a>一、简述。</h3><p>这也是在研究js运行机制拓展开，也算是对以前知识的一个review和总结。<a id="more"></a><br>如果有听说过js的异步任务的话，肯定会想到的js的异步编程，其中<strong>回调函数</strong>就是其中一个典型的<strong>异步设计模式。</strong>如果有看过jquery源码的童鞋，可以很清晰看到不少地方是有很多的回调函数的。具体关于异步编程可以参照阮一峰老师的💡<a href="http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html" target="_blank" rel="noopener">《Javascript异步编程的4种方法》</a> 这是一个链接！</p>
+<h3 id="二、定义和demo。"><a href="#二、定义和demo。" class="headerlink" title="二、定义和demo。"></a>二、定义和demo。</h3><p>🛎回调函数 ：a函数作为参数传进b函数里，且被b函数调用，则a函数被成为 ‘回调函数’；<br>📍回调函数其实也可以说是在运行当前函数，也就是b函数的时候，操作系统把a函数给挂起了，当等待其他事件完成（或者触发到a函数的时候），a函数才会被执行。<br>❓Q1：那回调函数是可以被异步函数调用，那么只能存在异步函数里？能不能被同步函数调用？关于其中的阻塞和非阻塞的情况又是怎么样的？</p>
+<p>关于回调函数，也说了其实是一个设计模式，只是设计成a函数可以作为b函数的参数，从而方便b函数调用。因此，回调函数既可以被同步函数调用，也可以被异步函数调用，但是还是所有区别的：</p>
+<blockquote>
+<p>在同步调用回调函数的时候，回调函数是最后执行的；<br>在异步调用回调函数里，回调函数可以被执行，也可以不被执行（当条件没有被触发时）</p>
+</blockquote>
+<p>其中，回调函数被同步调用肯定是阻塞的，被异步调用的话，在我看来是分情况讨论的，但是一般情况下</p>
+<blockquote>
+<p>异步调用回调函数的情况：<br>1、当事件没有被触发的时候；假如使用ajax调用回调函数，如果type类型没写对的话，换句话就是触发条件不成功，那么回调事件是不会没调用的；<br>2、当事件被触发的时候；一般情况下，异步的回调函数的条件都会没触发，例如使用定时器就是一个经典的例子，无论是setTimeout或者setInterval都是会被触发；</p>
+</blockquote>
+<p>下面就是编写的几个demo，互相会有一些对比，下面会有说明，图片里也有一些注释。</p>
+<h4 id="demo1-同步调用回调函数。"><a href="#demo1-同步调用回调函数。" class="headerlink" title="demo1:同步调用回调函数。"></a>demo1:同步调用回调函数。</h4><p><img src="/static/images/2018-07-01/1.png" alt=""></p>
+<h4 id="demo2-同步回调函数-VS-同步函数间调用；"><a href="#demo2-同步回调函数-VS-同步函数间调用；" class="headerlink" title="demo2:同步回调函数 VS 同步函数间调用；"></a>demo2:同步回调函数 VS 同步函数间调用；</h4><p>test1.js 这是个回调函数；是阻塞的；<br>test1_com.js 1.这不是回调函数;这只是单纯的函数之间的调用；是阻塞的；<br><img src="/static/images/2018-07-01/2.png" alt=""></p>
+<h4 id="demo3：异步调用回调函数"><a href="#demo3：异步调用回调函数" class="headerlink" title="demo3：异步调用回调函数"></a>demo3：异步调用回调函数</h4><p><img src="/static/images/2018-07-01/3.png" alt=""></p>
+<h4 id="demo4：同步回调函数-VS-同步函数间调用-VS-异步调用回调函数"><a href="#demo4：同步回调函数-VS-同步函数间调用-VS-异步调用回调函数" class="headerlink" title="demo4：同步回调函数 VS 同步函数间调用 VS 异步调用回调函数"></a>demo4：同步回调函数 VS 同步函数间调用 VS 异步调用回调函数</h4><p>3者的一些对比都卸载图片上了，可以放大图片对比一下；<br>这里就不做累赘的讲解了。<br><img src="/static/images/2018-07-01/4.png" alt="">  </p>
+<p>拓展：回调地狱（callback hell）</p>
+<hr>
+<p>回调地狱：就是在函数里不断去嵌套回调函数的做法，这样写代码是高糅合的，嗨难懂，后期维护很难；<br>下面是一个简单的嵌套回调函数demo:<br><img src="/static/images/2018-07-01/5.png" alt=""></p>
+<p>可能你看了上面这个demo，觉得没什么，好吧上面是嵌套3层的，接下来是经典的回调地狱<br><img src="/static/images/2018-07-01/6.png" alt=""><br>这样的很多的一个<code>}）</code>，造成了开发人员不容易去理解和编写代码的，所以有了Promise等等的一些方法去解决这些回调地狱的出现。 </p>
+<p>关于回调地狱的原文请参考：<br><a href="http://callbackhell.com/" target="_blank" rel="noopener">回调地狱</a><br>💡这是一个链接哈~<br>觉得不错的就点个赞呗！<br>如果哪个地方错误了欢迎指出，可以发邮件或者发简书私信，可以微信私聊哈~</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/javascript/">javascript</a>, <a href="/categories/javascript/前端/">前端</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/js/">js</a><a href="/tags/js小技巧/">js小技巧</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

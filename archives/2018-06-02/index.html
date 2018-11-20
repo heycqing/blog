@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>VS Code编辑器配置Java开发环境 | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="一、简述 及讨论由于学校课程的原因，是基本以java开发为主线的课程，但是我对java兴趣不大，">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="VS Code编辑器配置Java开发环境">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>VS Code编辑器配置Java开发环境</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2018-06-02/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-06-01T19:05:21.000Z">
+          2018-06-02
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="一、简述-及讨论"><a href="#一、简述-及讨论" class="headerlink" title="一、简述 及讨论"></a>一、简述 及讨论</h2><p>由于学校课程的原因，是基本以java开发为主线的课程，但是我对java兴趣不大，<a id="more"></a>又加上我不太喜欢 「Eclipse」这个java的<strong>集成开发环境</strong>（<strong>简称：IDE</strong>）。⚠️个人感受！个人感受！个人感受！求Java大神，工具爱好者，尤其编程器爱好者不要怼我😂😂，原因就是个人自我感受「Eclipse」不太好使，界面不太好看，操作起来感觉很笨重，在学校机房的操作给我留下了难以抹去的心理阴影。😐😐</p>
+<p>自从喜欢上VS code这个代码编辑器之后，就对IDE有点疏远，觉得IDE给人一种感受就是太容易了，所有东西都给足你了，导致编程者少了很多更深一步去了解所学语言的一个基本开发环境的配置的认识。本人觉得这样对个人发展不太好，之前在编写前端是也在编辑器和IDE之中徘徊，多用IDE，导致在使用编辑器之后发现很多东西需要去学习，发现还有很多有意思的东西去探索，逐渐适应使用命令行去开发。</p>
+<p>⚠️ <strong>以上是个人感受哈，不要引战！不要引战！不要引战！</strong></p>
+<p>想要讨论的同学请转战到：<a href="https://www.zhihu.com/question/47502517" target="_blank" rel="noopener">https://www.zhihu.com/question/47502517</a></p>
+<p>回到正题，如何在VS code编辑器配置java开发环境。</p>
+<h3 id="二、上手操作"><a href="#二、上手操作" class="headerlink" title="二、上手操作"></a>二、上手操作</h3><p>本人操作系统是：mac 。<br>所以在配置环境变量的这个阶段是基于mac平台的，同样原理的环境变量可以在window上配置。</p>
+<h4 id="2-1-第一步：下载JDK并且配置。"><a href="#2-1-第一步：下载JDK并且配置。" class="headerlink" title="2.1 第一步：下载JDK并且配置。"></a>2.1 第一步：下载JDK并且配置。</h4><p>可以到这个网站：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a> 下载，下载的jdk8版本的。</p>
+<p>如图：<br><img src="/static/images/2018-06-02/2.png" alt=""><br>选择 「Accept License Agreement」，然后下载相对应版本的jdk。<br>下载完毕之后，在终端找到配置文件，以我的为例：</p>
+<p>直接先在<strong>终端</strong>找到相对应的配置文件，然后进行修改</p>
+<p>先找到系统的配置文件，这里是我的全局配置文件。<br><code>vim /etc/profile</code><br>​<br>然后添加以下的语句，</p>
+<p>​<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=<span class="regexp">/Library/</span>Java/JavaVirtualMachines/jdk1<span class="number">.8</span><span class="number">.0</span>_171.jdk/Contents/Home</span><br><span class="line">CLASSPAHT=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH:</span><br><span class="line"><span class="keyword">export</span> JAVA_HOME</span><br><span class="line"><span class="keyword">export</span> CLASSPATH</span><br><span class="line"><span class="keyword">export</span> PATH </span><br><span class="line">​</span><br></pre></td></tr></table></figure></p>
+<p>再使用 <code>esc</code> 健，输入 <code>:wq!</code> ,保存直接退出到终端命令行界面。<br>使用以下 命令，重启配置文件。<br><code>source /etc/profile</code><br>​<br>在输入java -version，判断是否已经添加了jdk.<br><code>java -version</code><br>​</p>
+<p>如果出现了相关的java信息，则表示配置成功了。</p>
+<p>如下图：</p>
+<p><img src="/static/images/2018-06-02/3.png" alt=""><br>⚠️ 这里需要注意的是      </p>
+<ul>
+<li>1.要使用管理员权限才可以修改全局配置文件。      </li>
+<li><p>2.我这里是使用了zsh，如果有同学和我一样是使用了zsh的话，需要再重启一下zsh的配置文件，因为zsh和bash是不在同一配置环境中，需要再次重启zsh才可以让配置文件生效。</p>
+<p>下图是zsh的java命令示范：</p>
+</li>
+</ul>
+<p><img src="/static/images/2018-06-02/4.png" alt=""></p>
+<p>这样就显示已经安装好了jdk了。</p>
+<h4 id="2-2-第二步：安装maven并且配置。"><a href="#2-2-第二步：安装maven并且配置。" class="headerlink" title="2.2 第二步：安装maven并且配置。"></a>2.2 第二步：安装maven并且配置。</h4><p>关于maven，官网<a href="https://maven.apache.org/what-is-maven.html" target="_blank" rel="noopener">https://maven.apache.org/what-is-maven.html</a>是这样解释的：<br><img src="/static/images/2018-06-02/5.png" alt="">        <strong>简述介绍大概是说 maven是一个可以构建和管理任何以java为基础的项目的工具。</strong>        使用maven方便后面java项目的搭建，毕竟这是一个基本java环境搭建，后面还要去用它来搭建ssh框架的项目。        按照流程下完之后，解压到电脑上，我这里独自用了一个javaTool文件夹存放了maven。<br>同样像和JDK一样做好配置文件，在配置文件中添加如下的配置。</p>
+<blockquote>
+<p>maven</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> M2_HOME=<span class="regexp">/Users/</span>cqing/Documents/javaTool/apache-maven<span class="number">-3.5</span><span class="number">.3</span></span><br><span class="line"><span class="keyword">export</span> PATH=$M2_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>然后同样需要重启配置文件。<br>在终端输入这个命令 ：<code>mvn -v</code> ，出现下图就说明配置成功。<br><img src="/static/images/2018-06-02/6.png" alt=""></p>
+<p>🛠 OK! 关于操作系统的安装和配置已经弄好了。  </p>
+<h4 id="2-3-第三步：下载vscode关于java的插件。"><a href="#2-3-第三步：下载vscode关于java的插件。" class="headerlink" title="2.3 第三步：下载vscode关于java的插件。"></a>2.3 第三步：下载vscode关于java的插件。</h4><p>💡<strong>tips：其实当你放置java后缀文件的时候，vs code会自动提醒你去安装相关的插件。</strong><br>🚗走正常稳定的途径：<br>需要在VS code插件商店中安装如下的插件：<br><img src="/static/images/2018-06-02/7.png" alt=""></p>
+<p>关于插件的介绍和使用，在插件商店的说明有解释到。<br>这4个就足够了，但是我还下载了其他java的插件:<br><img src="/static/images/2018-06-02/8.png" alt=""></p>
+<p>⚠️下载完插件之后记得重新加载VScode。</p>
+<p>接着需要在<strong>VS code首选项</strong>中设置：</p>
+<p>用户设置中，或者工作区中进行如下设置：</p>
+<p><img src="/static/images/2018-06-02/9.png" alt=""></p>
+<p>OK！大功告成了！接下来可以在VS code中去跑一个java项目了。</p>
+<h3 id="三、演示结果"><a href="#三、演示结果" class="headerlink" title="三、演示结果"></a>三、演示结果</h3><p>可以新建一个文件夹，存放一个新的java demo。<br><strong>在使用命令构建过程中，需要自己去填写一些基础信息的。</strong><br>下面是操作演示，是gif，在构建过程可能有点稍微有点久，请稍等一下，建议在电脑看更清晰：</p>
+<p><img src="/static/images/2018-06-02/10.gif" alt="">   </p>
+<p>然后在gif图中发现当前文件夹没有内容，原因是我在选择文件的作为workspace的时候，没有选择当前文件夹，而是另一个，忘记改过来了。<br>我这里POST一下构建好的java demo（这才是构建好的目录）：<br><img src="/static/images/2018-06-02/11.png" alt="">  </p>
+<p>OK！事实证明已经构建好了java目录，然后可以进行调试了。<br>直接调试是不可以的，需要在launch.json进行一些文件配置。如下图：<br><img src="/static/images/2018-06-02/12.png" alt=""><br>然后可以，直接进行调试，直接按 fn + f5; <img src="/static/images/2018-06-02/13.png" alt=""><br>在调试要选择对的调试方法，要选择上面的调试方法，直接运行后可以在输出可以看到结果，如下图：</p>
+<p><img src="/static/images/2018-06-02/14.png" alt=""></p>
+<p>这样就可以得出调试结果了。<br>差不多就是这样的一个基本的基于VS code的java开发环境。<br><strong>还是那句话，如果觉得不错就点个赞！</strong>💡</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/java/">java</a>, <a href="/categories/java/vs-code/">vs code</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/vscode/">vscode</a><a href="/tags/java/">java</a><a href="/tags/开发环境/">开发环境</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

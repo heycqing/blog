@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>关于mac 文本转码问题 | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="简单的一个命令实际场景：需要手动把exccl表格，csv文件导入到mysql数据库，导入进去后发现出现乱码问题？">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="关于mac 文本转码问题">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>关于mac 文本转码问题</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2018-05-25-1 /" rel="bookmark">
+        <time class="entry-date published" datetime="2018-05-25T02:44:38.000Z">
+          2018-05-25
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="简单的一个命令"><a href="#简单的一个命令" class="headerlink" title="简单的一个命令"></a>简单的一个命令</h2><h3 id="实际场景："><a href="#实际场景：" class="headerlink" title="实际场景："></a>实际场景：</h3><p>需要手动把exccl表格，csv文件导入到mysql数据库，导入进去后发现出现乱码问题？</p>
+<a id="more"></a>
+<h3 id="使用的平台：mac"><a href="#使用的平台：mac" class="headerlink" title="使用的平台：mac"></a>使用的平台：mac</h3><p>【如果是window操作系统可以直接在「文件编辑器」中直接修改过来 ´д` ; 】</p>
+<p><strong>使用的工具：mac终端，可以使用默认自带的终端，我这里使用的是iterm</strong></p>
+<h3 id="操作过程："><a href="#操作过程：" class="headerlink" title="操作过程："></a>操作过程：</h3><h4 id="1-cd-到要转化的文件的位置"><a href="#1-cd-到要转化的文件的位置" class="headerlink" title="1.cd 到要转化的文件的位置"></a>1.cd 到要转化的文件的位置</h4><p>我的文件放在桌面，就可以如下：</p>
+<p><code>cd  Desktop</code></p>
+<h4 id="2-使用以下命令"><a href="#2-使用以下命令" class="headerlink" title="2.使用以下命令"></a>2.使用以下命令</h4><p><code>iconv -c -f &lt;源文件编码&gt; -t &lt;目标编码&gt; &lt;目标文件&gt;  &gt;  &lt;转换后的编码文件&gt;</code></p>
+<p>我的是下面的</p>
+<p><code>iconv -c -f GB18030 -t UTF-8 user1.csv &gt; user0.csv</code></p>
+<p>tip: 可以在文本编辑器中看到目标文件的编码, 使用偏好设置：  </p>
+<p><img src="/static/images/2018-05-25-1/0.jpeg" alt=""><br>然后重新打开文件，就可以验证了。  </p>
+<h4 id="一点点的小技巧。"><a href="#一点点的小技巧。" class="headerlink" title="一点点的小技巧。"></a>一点点的小技巧。</h4><p><img src="/static/images/2018-05-25-1/1.jpeg" alt=""></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/小技巧/">小技巧</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/mac小技巧/">mac小技巧</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

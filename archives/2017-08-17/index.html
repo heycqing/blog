@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>前后端分离使用mock.js模拟假数据 | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="前后端分离使用mock.js模拟假数据">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>前后端分离使用mock.js模拟假数据</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2017-08-17/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-08-17T08:29:05.000Z">
+          2017-08-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/static/images/2017-08-17-16/title.png" alt=""></p>
+<a id="more"></a>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>作为前端工程师，在这个前后端分离的时代，前后台数据的处理尤其重要，作为前端，想要脱离后端独立自己模拟虚假数据，这个非常重要。 而我，在前一阵子时间，在使用angular.js进行开发小项目的时候，需要去模拟一下数据，渲染一下数据，结果发现要使用dom原始操作来进行数据的渲染，要使用document.getelemnetbyid(‘’).appendchild()在需要显示的特定的元素下面，而且还要自己手动编辑信息，比较复杂。 然后呢，在学习vue.js的时候，刚好使用了node.js来作为js的编译环境，而且作为后端处理，在这里我是使用axios来大体jquery的$ajax来作为数据传输的接口，然后还是要手动自己写json数据……虽然这样可以模拟后端真实配给前端的链接，但是如果一对上，还需要更换链接，但是如果链接太多，数据太多的话，手动起来还是挺麻烦的。 最后，开始介绍一下前端数据模拟神器——mock.js； mock.js是国内的前端工程师写的，下面是他的个人博客：<a href="http://nuysoft.com/" target="_blank" rel="noopener">http://nuysoft.com/</a> 下面是mock.js的自个真实教程。</p>
+<h1 id="什么是mock-js"><a href="#什么是mock-js" class="headerlink" title="什么是mock.js"></a>什么是mock.js</h1><p>Mock.js 是一款模拟数据生成器，旨在帮助前端攻城师独立于后端进行开发，帮助编写单元测试。提供了以下模拟功能：</p>
+<ul>
+<li>根据数据模板生成模拟数据</li>
+<li>模拟 Ajax 请求，生成并返回模拟数据</li>
+<li>基于 HTML 模板生成模拟数据</li>
+</ul>
+<p>下面是官网的具体介绍： <img src="/static/images/2017-08-17-16/1.png" alt="">  </p>
+<h1 id="安装mock-js"><a href="#安装mock-js" class="headerlink" title="安装mock.js"></a>安装mock.js</h1><p>安装mock.js可以使用npm，可以使用bower来安装；<br>我是 使用node中的npm <strong>安装命令：npm install mockjs –save-dev</strong><br>然后是编写一个简单实例：<br><img src="/static/images/2017-08-17-16/2.png" alt=""><br><strong>运行命令：node &lt;文件名&gt;</strong><br><img src="/static/images/2017-08-17-16/3.png" alt=""> 上图是运行命令和结果展示。<br><strong>基本的教程是上面所写。</strong><br>mock其他具体的教程可以参照<a href="https://github.com/nuysoft/Mock/wiki/Getting-Started" target="_blank" rel="noopener">https://github.com/nuysoft/Mock/wiki/Getting-Started    </a><br>官网教程已经很详细了。<br>mock.js用法很简单，希望好好加油。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/mock-js/">mock.js</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/mock-js/">mock.js</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

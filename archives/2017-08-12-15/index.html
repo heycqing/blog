@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>阿里云服务器搭建 | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="阿里云服务器搭建">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>阿里云服务器搭建</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2017-08-12-15/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-08-12T07:35:22.000Z">
+          2017-08-12
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/static/images/2017-08-12-15/title.png" alt=""></p>
+<a id="more"></a>
+<h1 id="教程之前的声明；"><a href="#教程之前的声明；" class="headerlink" title="教程之前的声明；"></a>教程之前的声明；</h1><p>之前有使用过不同产商的服务器，</p>
+<ol>
+<li>有<strong>新浪云</strong>的，这个要冲云豆，但是里面是一套配好的系统；</li>
+<li>有腾讯云的，作为云服务器，这个众所周知，都要自己去配置环境的；</li>
+<li>有阿里云的，和腾讯云一样的，要自己去配好环境，作为学生，当然选择了阿里云这个服务商，比较有优惠。可以点击来获取优惠卷；<a href="https://promotion.aliyun.com/ntms/act/ambassador/sharetouser.html?userCode=j8vnzlte&amp;productCode=vm&amp;utm_source=j8vnzlte" target="_blank" rel="noopener">https://promotion.aliyun.com/ntms/act/ambassador/sharetouser.html?userCode=j8vnzlte&amp;productCode=vm&amp;utm_source=j8vnzlte</a>   </li>
+</ol>
+<h1 id="下面是搭建教程："><a href="#下面是搭建教程：" class="headerlink" title="下面是搭建教程："></a>下面是搭建教程：</h1><p>在阿里云购买服务器后选择要安装的系统；</p>
+<blockquote>
+<p>我选择的是CentOS 7.3 64位的；<br>内置的php版本是5.多6.多<br>如果使用ubuntu则是7.多；</p>
+</blockquote>
+<h2 id="步骤1："><a href="#步骤1：" class="headerlink" title="步骤1："></a>步骤1：</h2><p>我需要在与服务连接 xshell 应用来在桌面使用命令行；</p>
+<p><img src="/static/images/2017-08-12-15/1.png" alt=""></p>
+<p>可以在Xshell 上使用 <code>ssh root@主机名</code>连接，输入用户名和密码；</p>
+<h2 id="步骤2："><a href="#步骤2：" class="headerlink" title="步骤2："></a>步骤2：</h2><p>需要升级一下apt,不然无法从网上获取响应的模块；</p>
+<p>用到命令是：</p>
+<p><code>apt update</code></p>
+<p>升级完后，就可以对云服务器为所欲为了；</p>
+<h2 id="步骤3："><a href="#步骤3：" class="headerlink" title="步骤3："></a>步骤3：</h2><p>因为我需要安装mysql来接连 sql可视化软件来进行管理,然后呢,我用命令行：</p>
+<p><code>apt install mysq-server</code></p>
+<p><code>apt install mysql-client</code></p>
+<p>mysql的c语言的开发接口；</p>
+<p><code>apt install libmysqlclinet15-dev</code></p>
+<p>然后或出现一系列的安装信息,输入用户名和密码即可,安装完后可以使用</p>
+<p><code>netstat -tap | grep mysql</code></p>
+<p>来检查 mysql 是否处于 listen 状态,然后，就是使用 mysql 了；</p>
+<p><code>mysql -u 用户名 -p密码</code></p>
+<p>就会出现下面的图示</p>
+<p><img src="/static/images/2017-08-12-15/2.png" alt=""></p>
+<p>可以使用下面这个来查看数据库；</p>
+<p><code>show databases;</code></p>
+<p>在mysql终端里，记得在命令结束后加上一个<code>;</code></p>
+<p> <img src="/static/images/2017-08-12-15/3.png" alt=""></p>
+<p>在与服务器里安装好 mysql 后，我想要连接本机电脑上的可视化sql软件,然后,出现了下面的错误，无法连接上；</p>
+<p><img src="/static/images/2017-08-12-15/4.png" alt=""></p>
+<p>是因为要在云服务器上做好配置,首先要在云服务器的 mysql 分配好可以连接远程主机的配置；</p>
+<p> <img src="/static/images/2017-08-12-15/5.png" alt=""></p>
+<p>然后<code>mysql&gt;exit;</code> 退出 <code>mysql</code></p>
+<p>然后<code>vim /etc/mysql/my.cnf</code></p>
+<p><img src="/static/images/2017-08-12-15/6.png" alt=""></p>
+<p>然后就可以连上了；</p>
+<h2 id="步骤4："><a href="#步骤4：" class="headerlink" title="步骤4："></a>步骤4：</h2><p>我需要安装 一个代理服务器 <code>nginx</code></p>
+<p><code>apt install nginx</code></p>
+<p>然后可以使用</p>
+<p><code>netstat -tap | grep nginx</code></p>
+<p>查看当前 <code>nginx</code> 的状态；</p>
+<p>在浏览器里输入<code>ip</code>地址就可以访问了；</p>
+<p><img src="/static/images/2017-08-12-15/7.png" alt=""></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/云服务器搭建/">云服务器搭建</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/服务器搭建/">服务器搭建</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

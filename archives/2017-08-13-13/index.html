@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Pm2的使用 | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Pm2的使用">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Pm2的使用</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2017-08-13-13/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-08-13T05:53:20.000Z">
+          2017-08-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/static/images/2017-08-13-13/title.png" alt=""></p>
+<a id="more"></a>
+<h1 id="为什么使用Pm2"><a href="#为什么使用Pm2" class="headerlink" title="为什么使用Pm2"></a>为什么使用Pm2</h1><p>最近，在学习使用vue.js前端框架，计划写一套前端到后端都是javascript的webapp，技术栈是<strong>vue+node+mysql</strong>; 在写的过程中，自己用node写了一个简单服务器，用来<strong>连接前端后端的数据交互</strong>； <strong>前端：vue+vue-router+axios</strong> <strong>后端：node</strong> 问题：因为我这个程序是在本地运行，没有放上服务器，而且我是使用了vs code 这个代码编辑器，由于只有一个终端，在运行cnpm run dev 后，就不能让我自己编写的node.js来运行了，这时我需要一个能在后台运行并且能监控我自己编写的js文件能不能运行成功的东西。 所以选择了pm2这个node进程管理器；  </p>
+<h1 id="Pm2的使用（进程守护）"><a href="#Pm2的使用（进程守护）" class="headerlink" title="Pm2的使用（进程守护）"></a>Pm2的使用（进程守护）</h1><blockquote>
+<p>基于网上的部分教程已经比较详细了，下面是修改于豆瓣和SegmentFault 的内容；</p>
+</blockquote>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>pm2 是一个带有负载均衡功能的Node应用的进程管理器. 当你要把你的独立代码利用全部的服务器上的所有CPU，并保证进程永远都活着，0秒的重载， PM2是完美的。它非常适合IaaS结构，但不要把它用于PaaS方案（随后将开发Paas的解决方案）. 备注：SaaS、PaaS和IaaS是云服务模式。</p>
+<ul>
+<li>SaaS 软件即服务，例如Google的 Gmail 邮箱服务.面向应用型用户</li>
+<li>PaaS 平台即服务.例如Google的GAE,面向开发型用户</li>
+<li>IaaS 基础架构即服务,例如亚马逊的AWS，IaaS对于不知道新推出的应用程序/网站会有多成功的创业公司来说非常有用</li>
+</ul>
+<p>请参考 <a href="http://cloud.51cto.com/art/201107/278903.htm" target="_blank" rel="noopener">云服务模式：SaaS、PaaS和IaaS，哪一种适合你？</a></p>
+<h2 id="主要特性"><a href="#主要特性" class="headerlink" title="主要特性"></a>主要特性</h2><ul>
+<li>内建负载均衡（使用 Node cluster 集群模块）</li>
+<li>后台运行</li>
+<li>0 秒停机重载，我理解大概意思是维护升级的时候不需要停机.</li>
+<li>具有 Ubuntu 和 CentOS 的启动脚本</li>
+<li>停止不稳定的进程（避免无限循环）</li>
+<li>控制台检测</li>
+<li>提供 HTTP API</li>
+<li>远程控制和实时的接口 API ( Nodejs 模块，允许和 PM2 进程管理器交互 )</li>
+</ul>
+<p>测试过 Nodejs v0.11/v0.10/v0.8 版本，兼容 CoffeeScript，基于 Linux 和 MacOS。  </p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>–</p>
+<blockquote>
+<p>npm install -g pm2</p>
+</blockquote>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ npm install pm2 -g     # 命令行安装 pm2 </span><br><span class="line">$ pm2 start app.js -i 4  # 后台运行pm2，启动4个app.js </span><br><span class="line">                         # 也可以把'max' 参数传递给 start</span><br><span class="line">                         # 正确的进程数目依赖于Cpu的核心数目</span><br><span class="line">$ pm2 start app.js --name my-api # 命名进程</span><br><span class="line">$ pm2 list               # 显示所有进程状态</span><br><span class="line">$ pm2 monit              # 监视所有进程</span><br><span class="line">$ pm2 logs               # 显示所有进程日志</span><br><span class="line">$ pm2 stop all           # 停止所有进程</span><br><span class="line">$ pm2 restart all        # 重启所有进程</span><br><span class="line">$ pm2 reload all         # 0 秒停机重载进程 (用于 NETWORKED 进程)</span><br><span class="line">$ pm2 stop 0             # 停止指定的进程</span><br><span class="line">$ pm2 restart 0          # 重启指定的进程</span><br><span class="line">$ pm2 startup            # 产生 init 脚本 保持进程活着</span><br><span class="line">$ pm2 web                # 运行健壮的 computer API endpoint (http://localhost:9615)</span><br><span class="line">$ pm2 delete 0           # 杀死指定的进程</span><br><span class="line">$ pm2 delete all         # 杀死全部进程</span><br></pre></td></tr></table></figure>
+<h2 id="运行进程的不同方式："><a href="#运行进程的不同方式：" class="headerlink" title="运行进程的不同方式："></a>运行进程的不同方式：</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ pm2 start app.js -i max     # 根据有效CPU数目启动最大进程数目  </span><br><span class="line">$ pm2 start app.js -i 3       # 启动3个进程 </span><br><span class="line">$ pm2 start app.js -x     #用fork模式启动 app.js 而不是使用 cluster </span><br><span class="line">$ pm2 start app.js -x -- -a 23   # 用fork模式启动 app.js 并且传递参数 (-a 23) </span><br><span class="line">$ pm2 start app.js --name serverone   # 启动一个进程并把它命名为 serverone </span><br><span class="line">$ pm2 stop serverone    # 停止 serverone 进程 </span><br><span class="line">$ pm2 start app.json    # 启动进程, 在 app.json里设置选项 </span><br><span class="line">$ pm2 start app.js -i max -- -a 23    #在--之后给 app.js 传递参数 </span><br><span class="line">$ pm2 start app.js -i max -e err.log -o out.log     # 启动 并 生成一个配置文件 你也可以执行用其他语言编写的app ( fork 模式): </span><br><span class="line">$ pm2 start my-bash-script.sh -x --interpreter bash </span><br><span class="line">$ pm2 start my-python-script.py -x --interpreter python</span><br></pre></td></tr></table></figure>
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a><strong>注意：</strong></h3><ul>
+<li>仅能用于 web 应用</li>
+<li>运行于 Node 0.11.x 版本</li>
+<li>运行于 cluster 模式（默认模式）</li>
+</ul>
+<h3 id="CoffeeScript"><a href="#CoffeeScript" class="headerlink" title="CoffeeScript:"></a>CoffeeScript:</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pm2 start my_app.coffee  #这就是全部</span><br></pre></td></tr></table></figure>
+<h3 id="PM2-准备好为产品级服务了吗？"><a href="#PM2-准备好为产品级服务了吗？" class="headerlink" title="PM2 准备好为产品级服务了吗？"></a>PM2 准备好为产品级服务了吗？</h3><p>只需要在自己的服务器上测试</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https:<span class="comment">//github.com/Unitech/pm2.git</span></span><br><span class="line">$ cd pm2</span><br><span class="line">$ npm install  # 或者 npm install --dev ，如果devDependencies 没有安装</span><br><span class="line">$ npm test</span><br></pre></td></tr></table></figure>
+<p><code>pm2 list</code>：列出由 PM2 管理的所有进程信息，还会显示一个进程会被启动多少次，因为没处理的异常。<br><img src="/static/images/2017-08-13-13/1.jpg" alt="">   </p>
+<p><code>pm2 monit</code>：监视每个 node 进程的 CPU 和内存的使用情况。<br><img src="/static/images/2017-08-13-13/2.jpg" alt="">   </p>
+<h5 id="原文转载：https-segmentfault-com-a-1190000002539204"><a href="#原文转载：https-segmentfault-com-a-1190000002539204" class="headerlink" title="原文转载：https://segmentfault.com/a/1190000002539204"></a>原文转载：<a href="https://segmentfault.com/a/1190000002539204" target="_blank" rel="noopener">https://segmentfault.com/a/1190000002539204</a></h5>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/前端/">前端</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/pm2/">pm2</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

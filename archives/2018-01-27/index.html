@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>parcel零配置打包项目 | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="简述parcel简单来说，parcel就是和webpack一样，主要功能都是打包项目文件； parcel.js的官方网站 :https://parceljs.org/ parcel.js的github：https://github.com/parcel-bundler/parcel">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="parcel零配置打包项目">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>parcel零配置打包项目</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2018-01-27/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-01-27T09:34:16.000Z">
+          2018-01-27
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="简述parcel"><a href="#简述parcel" class="headerlink" title=" 简述parcel"></a> 简述parcel</h1><p>简单来说，parcel就是和webpack一样，主要功能都是打包项目文件； parcel.js的官方网站 :<a href="https://parceljs.org/" target="_blank" rel="noopener">https://parceljs.org/</a> parcel.js的github：<a href="https://github.com/parcel-bundler/parcel" target="_blank" rel="noopener">https://github.com/parcel-bundler/parcel</a><br><a id="more"></a></p>
+<h4 id="parcel-js的简介如下："><a href="#parcel-js的简介如下：" class="headerlink" title="parcel.js的简介如下："></a>parcel.js的简介如下：</h4><p><img src="/static/images/2018-1-27/1.png" alt=""></p>
+<h4 id="为什么要使用parcel"><a href="#为什么要使用parcel" class="headerlink" title="为什么要使用parcel?"></a>为什么要使用parcel?</h4><h5 id="可以参考下面的介绍："><a href="#可以参考下面的介绍：" class="headerlink" title="可以参考下面的介绍："></a>可以参考下面的介绍：</h5><p><img src="/static/images/2018-1-27/2.png" alt="">  </p>
+<h1 id="好吧进入正题，"><a href="#好吧进入正题，" class="headerlink" title="好吧进入正题，"></a>好吧进入正题，</h1><p>之前在parcel刚兴起的时候，是通过justjavac大神的介绍开始接触的，而且自己之前也有尝试了一下，并且结合了gulp.js来作为压缩项目文件的，但是在做着做着的时候意识到仿佛好像只有react.js才可以和parcel.js相配合一样，但是我最近是基于vue.js来写的，这样急匆匆换成react.js感觉很不好，在想有没有parcel.js是可以和vue.js一起的…..于是，就放在一边了….今天刚好有看到相关的插件…所以有才开始了，parcel的打包流程…..</p>
+<h2 id="先看一下大概的项目目录："><a href="#先看一下大概的项目目录：" class="headerlink" title="先看一下大概的项目目录："></a>先看一下大概的项目目录：</h2><p>  <img src="/static/images/2018-1-27/3.gif" alt="">     这是我加了gulp在里面的一个大概的项目样子，这次先不涉及gulp这方面的讲解；  </p>
+<h2 id="基础部署"><a href="#基础部署" class="headerlink" title="基础部署"></a>基础部署</h2><p>我使用的是vscode编辑器，包管理工具是npm;</p>
+<h3 id="引入parcel-js"><a href="#引入parcel-js" class="headerlink" title="引入parcel.js"></a>引入parcel.js</h3><p>在文件夹里，通过在终端输入 这是全局的引入： <code>npm install -g parcel-bundler</code> 我一般是在项目目录中引入：</p>
+<p><code>npm install --save-dev parcel-bundler</code></p>
+<h3 id="初始化配置文件"><a href="#初始化配置文件" class="headerlink" title="初始化配置文件:"></a>初始化配置文件:</h3><p><code>npm init -y</code> 就会出现如下的基础配置文件，用红线框出来的是我后来自己加上去的，初始化的配置文件信息就是红线框外的信息：这些信息有一些描述性的基础信息是可以自己来编写的：   <img src="/static/images/2018-1-27/4.png" alt="">   这样基本的配置信息的就完成了，后面如果自己再加上其他插件或者npm 的其他命令，里面的配置信息就会改变，当然配置自己的npm命令可以自己在配置文件中编写，例如上面的start和build命令；下面会讲到的。</p>
+<h3 id="新建index-html和index-js文件；"><a href="#新建index-html和index-js文件；" class="headerlink" title="新建index.html和index.js文件；"></a>新建index.html和index.js文件；</h3><p>初步上手，记得index.html得写在根目录； index.html文件： <img src="/static/images/2018-1-27/5.png" alt=""> index.js文件： <img src="/static/images/2018-1-27/6.png" alt=""> 可以简单写console.log()来判断一下是否被调用：</p>
+<h3 id="接着可以运行一下命令，查看一下本地服务器的运行："><a href="#接着可以运行一下命令，查看一下本地服务器的运行：" class="headerlink" title="接着可以运行一下命令，查看一下本地服务器的运行："></a>接着可以运行一下命令，查看一下本地服务器的运行：</h3><p><code>parcel index.html</code> 或者在package.json文件中配置了start命令的可以直接使用 <code>npm start</code> 如下： <img src="/static/images/2018-1-27/7.gif" alt="">   上面有注意到那个时间，可能我是电脑有点卡，跑得不太快，一般来说都是比较快的； 基本的操作到了这里就可以了，后面小伙伴们可以随意加不同前端工作流插件进去；</p>
+<h1 id="vue文件加入parcel中："><a href="#vue文件加入parcel中：" class="headerlink" title="vue文件加入parcel中："></a>vue文件加入parcel中：</h1><p>添加命令： 用于添加parcel的vue插件<br><code>npm install --save-dev parcel-plugin-vue</code></p>
+<p>添加vue.js可以通过命令<br><code>npm install --save-dev vue</code></p>
+<p>也可以通过cdn来添加 <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script> 下面是我的尝试vue的目录： <img src="h/static/images/2018-1-27/8.png" alt=""></p>
+<h2 id="vue-再parcel中的文件内容"><a href="#vue-再parcel中的文件内容" class="headerlink" title="vue 再parcel中的文件内容"></a>vue 再parcel中的文件内容</h2><p>你需要再根目录的index.html页面引入vue文件夹的index.js; 下面是index.js的内容: <img src="/static/images/2018-1-27/9.png" alt="">  下面是app.vue的内容： <img src="/static/images/2018-1-27/10.png" alt="">   下面是index.html中的内容: <img src="/static/images/2018-1-27/11.png" alt="">   然后直接运行parcel index.html 或者 npm start 就可以得出下面的页面了； <img src="/static/images/2018-1-27/12.png" alt="">  </p>
+<h1 id="值得注意的是："><a href="#值得注意的是：" class="headerlink" title="值得注意的是："></a>值得注意的是：</h1><p>如果你是使用es6 语法的记得在<strong>命令行输入：</strong> <img src="/static/images/2018-1-27/13.png" alt=""> 用于安装 Babel的转化器，来将es6转换es5；  </p>
+<h4 id="还有用于sass-react，gulp等等。。。配合parcel来进行的打包的"><a href="#还有用于sass-react，gulp等等。。。配合parcel来进行的打包的" class="headerlink" title="还有用于sass,react，gulp等等。。。配合parcel来进行的打包的"></a>还有用于sass,react，gulp等等。。。配合parcel来进行的打包的</h4><p>  欢迎来GitHub star ：<a href="https://github.com/heycqing/parcel_gulp_vue" target="_blank" rel="noopener">https://github.com/heycqing/parcel_gulp_vue</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/前端/">前端</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

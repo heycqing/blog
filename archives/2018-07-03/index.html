@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>奶一波浏览器DOM操作 | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="一、简述​ 关于浏览器DOM的操作可以说是一名合格的前端工程师的必备技能，在我个人看来，无论你是使用jquery到炉火纯青（本人有看过部分源码）">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="奶一波浏览器DOM操作">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>奶一波浏览器DOM操作</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2018-07-03/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-07-03T06:07:16.000Z">
+          2018-07-03
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="一、简述"><a href="#一、简述" class="headerlink" title="一、简述"></a>一、简述</h2><p>​ 关于浏览器DOM的操作可以说是一名合格的前端工程师的必备技能，在我个人看来，无论你是使用jquery到炉火纯青（本人有看过部分源码）<a id="more"></a>，还是使用各种css框架到6得飞起，或者正在使用主流的前端框架，我都觉得个人都要通过DOM这一关，这是十分重要的，万层高楼基层起，熟练掌握这种技能十分重要。 ​ 这是其一，另一方面就是，DOM这部分是浏览器模型的一部分，相信有听说过DOM树，就是关于浏览器如何解析HTML语言并且展示出来，（当然需要合成渲染树才能整体呈现给用户）。这也是作为一名合格的前端工程师应该去了解的关于浏览器模型的知识点，（ 🗝是不是又点亮了技能树？）  </p>
+<h2 id="二、DOM是什么？"><a href="#二、DOM是什么？" class="headerlink" title="二、DOM是什么？"></a>二、DOM是什么？</h2><p>​ DOM是什么？文档对象模型（Document Object Model），个人觉得是一种对于在浏览器运行的HTML文件的解析出来的一个API文档，（可以结合上次讲到js的运行机制）DOM树的构建则是浏览器在呈现一个页面中一个重要的步骤，这就意味着每一个浏览器中必然有着DOM，但是由于浏览器种类很多，不同浏览器对DOM的执行是不一样的，尤其像IE浏览器这种非主流的存在（有一段时间不遵循W3c，可以了解一下IE浏览器的历史）。<br><img src="/static/images/2018-07-03/1.jpg" alt="">​ </p>
+<h4 id="DOM重要的功能？"><a href="#DOM重要的功能？" class="headerlink" title="DOM重要的功能？"></a>DOM重要的功能？</h4><p>​ 其实就是构建DOM树，就是构建本节点、父节点和兄弟节点以及它们之间的关系，从而形成DOM树，它其实本身是一个API文档，方便调用其来达到修改文档内容结构和样式的作用；  </p>
+<h4 id="如何构建DOM树？"><a href="#如何构建DOM树？" class="headerlink" title="如何构建DOM树？"></a>如何构建DOM树？</h4><p>​ 看一下图就会明白了（图来自网络）<br><img src="/static/images/2018-07-03/2.png" alt=""> ​<br> 这是浏览器里内部的一个处理机制。<br> 主要步骤有： ​ </p>
+<ul>
+<li>1、Bytes to Characters ：把二进制转为html字符串，即是传统说的从汇编语言到高级语言（虽然html并不算是高级语言，只是一个标记语言<strong>【SGML】</strong>） ​ </li>
+<li>2、 Characters to Tokens ：把html字符串按照标记算法转化成 Tokens（标记），存有自己闭合标签里的文本信息； ​ </li>
+<li>3、Tokens to Nodes ：把标记转为一个个节点（node），然后文本信息添加完了，接着肯定是要添加节点的属性以及属性访问器； ​ </li>
+<li>4、Nodes to DOM ：最后就是构建DOM树了，把兄弟节点父节点连起来，构建它们之间的关系网络，形成DOM树。 ​ </li>
+</ul>
+<h4 id="Parse-HTML"><a href="#Parse-HTML" class="headerlink" title="Parse HTML"></a>Parse HTML</h4><p>​ 其中在浏览器的开发者工具可以看到关于DOM树的构建，<strong>即Parse HTML</strong>，可以看到构建的时间和性能，这里我选取的Chrome的chrome dev。（旧版本是Timeline标签，新版本是Performance标签）。<br><img src="/static/images/2018-07-03/3.png" alt=""> ​<br>这一部分可以跳过不看，没大的影响，只是可以普及一下知识，高手可以跳过不看，想快速上手操作DOM对象的也可以跳过这一部分。  </p>
+<h2 id="三、JS操作DOM"><a href="#三、JS操作DOM" class="headerlink" title="三、JS操作DOM"></a>三、JS操作DOM</h2><blockquote>
+<p>​ 其实在这里可以从一道面试题衍生出去：</p>
+<p>1、DOM结构 —— 两个节点之间可能存在哪些关系以及如何在节点之间任意移动。<br>​<br>2、DOM操作 —— 如何添加、移除、移动、复制、创建和查找节点等。</p>
+</blockquote>
+<p>  部分demo图<br><img src="/static/images/2018-07-03/4.png" alt=""><br><img src="/static/images/2018-07-03/5.png" alt=""></p>
+<h4 id="DOM的结构"><a href="#DOM的结构" class="headerlink" title="DOM的结构"></a>DOM的结构</h4><p>​ DOM结构，我个人理解是分：</p>
+<blockquote>
+<p>本节点、其兄弟节点、其父节点、其子节点。<br>​每个节点里内含属性以及文本信息。</p>
+</blockquote>
+<p>​</p>
+<h4 id="DOM节点之间的任意移动"><a href="#DOM节点之间的任意移动" class="headerlink" title="DOM节点之间的任意移动"></a>DOM节点之间的任意移动</h4><p>​ 其实就是访问相关的node节点，包括自身的节点、父子节点、兄弟节点。</p>
+<h5 id="访问自身的节点"><a href="#访问自身的节点" class="headerlink" title="访问自身的节点"></a>访问自身的节点</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//常规性操作；</span></span><br><span class="line"><span class="keyword">let</span> node = <span class="built_in">document</span>.getElementById(<span class="string">'main'</span>);</span><br><span class="line"><span class="keyword">let</span> node = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'mainClass'</span>)\[<span class="number">0</span>\]</span><br><span class="line"><span class="keyword">let</span> node = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>)\[<span class="number">0</span>\]</span><br><span class="line">​</span><br><span class="line"><span class="comment">//通过选择器访问，此外还有css选择器访问的，这里没有写，可以参考MDN的</span></span><br><span class="line"><span class="keyword">let</span> node = <span class="built_in">document</span>.querySelector(<span class="string">'#main'</span>);</span><br><span class="line"><span class="keyword">let</span> node = <span class="built_in">document</span>.querySelectorAll(<span class="string">'#main'</span>)\[<span class="number">0</span>\]</span><br></pre></td></tr></table></figure>
+<p>​</p>
+<h5 id="访问其父子节点"><a href="#访问其父子节点" class="headerlink" title="访问其父子节点"></a>访问其父子节点</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//访问node的父节点</span></span><br><span class="line"><span class="keyword">let</span> node_parentNode = node.parentNode;</span><br><span class="line"><span class="keyword">let</span> node_parentElemnt = node.parentElement;</span><br><span class="line">​</span><br><span class="line"><span class="comment">//访问node的子节点</span></span><br><span class="line">​</span><br><span class="line"><span class="comment">//访问node所有子节点</span></span><br><span class="line"><span class="keyword">let</span> node_childNodes = node.childNodes;</span><br><span class="line">​</span><br><span class="line"><span class="comment">//访问第一个子节点</span></span><br><span class="line"><span class="keyword">let</span> node_firstChild = node.firstChild;</span><br><span class="line">​</span><br><span class="line"><span class="comment">//访问最后一个子节点</span></span><br><span class="line"><span class="keyword">let</span> node_lastChild = node.lastChild;</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<h5 id="访问其兄弟节点"><a href="#访问其兄弟节点" class="headerlink" title="访问其兄弟节点"></a>访问其兄弟节点</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//访问当前节点的同属上一个节点</span></span><br><span class="line"><span class="keyword">let</span> node_previousSibling = node.previousSibling</span><br><span class="line">​</span><br><span class="line"><span class="comment">//访问当前节点的同属下一个节点</span></span><br><span class="line"><span class="keyword">let</span> node_nextSibling = node.nextSibling</span><br></pre></td></tr></table></figure>
+<p>  ⚠️值得注意的是，如果想要访问上一个div节点，就得链式得调用 <code>previousSibling</code> 或者 <code>nextSibling</code> ，不然只会得到 <code>text</code> 类型的空节点；<br> 如图：<br> <img src="/static/images/2018-07-03/6.png" alt=""><br> <img src="/static/images/2018-07-03/7.png" alt="">    </p>
+<h4 id="拓展："><a href="#拓展：" class="headerlink" title="拓展："></a>拓展：</h4><p>​ 刚才可以在我在vscode上编写的代码图片可以看到，em….就是下面这张；<br><img src="/static/images/2018-07-03/8.png" alt="">   ​  ​<br><strong>被我用红线框起来的这部分代码，可以说我做了一个对比，是关于node和element的。</strong> ​<br>这里其实可以参考MDN里的关于node的一个介绍，大概是说大部分的dom都是node这个为基类去拓展自身的属性，而且它也给出了关于互相的继承的图示（图1），以及可以通过node的 <code>nodeType</code> 属性得到不同继承node基类所形成的实类的类型的值（图2）。 ​<br>图1：这是在关于在讲述element页面摘下的图。<br><img src="/static/images/2018-07-03/9.png" alt=""><br>   ​<br>在图1可以看到， <code>Element</code> 继承了 <code>node</code> ，而 <code>node</code> 则继承了 <code>EventTarget</code>。 ​<br>图2：这是node的属性 <code>nodeType</code> 得出不同类型的值。 ​<br> <img src="/static/images/2018-07-03/10.png" alt=""> </p>
+<p>简单来说在常见的 <code>element</code> <code>text</code> <code>comment</code> <code>document</code> 都是继承node的实例，分别对应着 <code>ELEMENT_NODE</code> ，值为1；<code>TEXT_NODE</code> 值为3； <code>COMMENT_NODE</code> 值为8；<code>DOCUMENT_NODE</code> 值为9。</p>
+<h5 id="如何证明真的存在这些实例呢？"><a href="#如何证明真的存在这些实例呢？" class="headerlink" title="如何证明真的存在这些实例呢？"></a>如何证明真的存在这些实例呢？</h5><p>​ 我编写了一个简单的text.js来证明这一理论：<br>相关代码图示：<br><img src="/static/images/2018-07-03/11.png" alt=""> </p>
+<p>运行在浏览器的结果：<br><img src="/static/images/2018-07-03/12.png" alt=""></p>
+<p>可见，它们和NodeType的值是一一对应的； 然后，再来看一下它们的节点内涵的文本值：<br><img src="/static/images/2018-07-03/13.png" alt=""><br><img src="/static/images/2018-07-03/14.png" alt="">   </p>
+<p>中间有一些地方时是空的，说明节点之间是存有一个空的节点，也就是说如果这些空的节点填入实际的文本信息的话，它会显示在浏览器，你再一次log它的时候，是可以看到有值得，例如 “注释“ 会显示出来。<br>上个图说明一下：<br><img src="/static/images/2018-07-03/15.png" alt=""> </p>
+<p>这是可以说明理论是对的， <code>element</code> <code>text</code> <code>comment</code> 是特殊的 <code>node</code> 的实例，是继承于 <code>Node</code> ; 也可以通过在控制台可以看见其子节点，亦可以说明这一点。      </p>
+<h4 id="DOM的操作"><a href="#DOM的操作" class="headerlink" title="DOM的操作"></a>DOM的操作</h4><p>​关于DOM的操作，有创建、添加、移除、移动、复制和查找节点。 这里贴出代码图，方便参考一下：<br><img src="/static/images/2018-07-03/16.png" alt=""></p>
+<h5 id="DOM的查找"><a href="#DOM的查找" class="headerlink" title="DOM的查找"></a>DOM的查找</h5><p>​ 上面其实已经说过了，就是如何访问相关的DOM节点。 ​</p>
+<h5 id="DOM的创建"><a href="#DOM的创建" class="headerlink" title="DOM的创建"></a>DOM的创建</h5><p>​ 上文有说过，一个节点的结构，包含了当前节点的 <code>Element</code> <code>文本信息</code> <code>属性</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建当前节点</span></span><br><span class="line"><span class="keyword">let</span> newNode = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 添加当前节点的属性;</span></span><br><span class="line"><span class="comment">// 方法1：</span></span><br><span class="line"><span class="keyword">let</span> newAtrr = <span class="built_in">document</span>.createAttribute(<span class="string">'new'</span>);</span><br><span class="line">newAtrr.value = <span class="string">'opop'</span>;</span><br><span class="line">newNode.setAttributeNode(newAtrr);</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 方法2：</span></span><br><span class="line">newNode.setAttribute(<span class="string">'new'</span>,<span class="string">'opop'</span>);</span><br><span class="line">​</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 添加当前节点的文本</span></span><br><span class="line"><span class="keyword">let</span> newText = <span class="built_in">document</span>.createTextNode(<span class="string">"这是新的文本信息"</span>);</span><br><span class="line">newNode.appendChild(newText);</span><br></pre></td></tr></table></figure></p>
+<p>创建仅仅是这样，但是新创建的元素必须要基于现在已经渲染出来的节点去添加，才会先显示在文档流中，</p>
+<h5 id="⚠️这里需要注意的是："><a href="#⚠️这里需要注意的是：" class="headerlink" title="⚠️这里需要注意的是："></a>⚠️这里需要注意的是：</h5><p>如果你是使用js文件去创建新节点，你不能把js脚本放在head的里面，否则的话浏览器会渲染不出来，你会发现自己创建的新节点会消失掉。</p>
+<p>里面的原理是，和浏览器的渲染过程有关系，如果把js脚本放在head里面，浏览器会先去渲染heade标签里面的js标签，再去渲染已有的dom文档，js先于dom节点执行，结果是无法找到你要添加的基点节点，因此想要创建的节点就无法显示，所以这样的做法是无法渲染出来的。这里面也有涉及到js脚本的阻塞问题。</p>
+<p>解决方法：把js脚本放在body的底部，或者使用 <code>&lt;body onload=&#39;js函数&#39;&gt;</code>，在dom完成之后，才开始去创建新的节点。</p>
+<h4 id="DOM的添加"><a href="#DOM的添加" class="headerlink" title="DOM的添加"></a>DOM的添加</h4><p>这里是和DOM的创建是联系的，上文也已经说到了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加文本到当前节点上</span></span><br><span class="line">newNode.appendChild(newText);</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 添加当前节点到另一个节点里面;很明显child嘛，就是添加子节点；</span></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(newNode);</span><br><span class="line">​</span><br><span class="line"><span class="comment">//  body作为为父节点，把newNode添加到 id=main 节点的前面；</span></span><br><span class="line"><span class="comment">//  父节点.insertBefore(新节点，要被插入到前面的节点)</span></span><br><span class="line"><span class="built_in">document</span>.body.insertBefore(newNode,<span class="built_in">document</span>.getElementById(<span class="string">'main'</span>));</span><br><span class="line"></span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<h4 id="DOM的替换节点"><a href="#DOM的替换节点" class="headerlink" title="DOM的替换节点"></a>DOM的替换节点</h4><p>父节点.replaceChild(新节点，要被替换的节点)</p>
+<p><code>document.body.replaceChild(newNode,document.getElementById(&#39;main&#39;))</code></p>
+<p>​</p>
+<h4 id="DOM的移除节点"><a href="#DOM的移除节点" class="headerlink" title="DOM的移除节点"></a>DOM的移除节点</h4><p>父节点.removeChild(要被移除的子节点)</p>
+<p><code>document.body.removeChild(document.getElementById(&#39;main&#39;))</code></p>
+<h4 id="DOM的复制节点"><a href="#DOM的复制节点" class="headerlink" title="DOM的复制节点"></a>DOM的复制节点</h4><p>要复制的节点.cloneNode(ture/false) true意味着要把自身和所有后代节点的信息都复制，包括事件等等；</p>
+<p>false意味着只复制自身，当然也包括事件等等；</p>
+<p><code>document.getElementById(&#39;main&#39;).cloneNode(false)</code></p>
+<h2 id="四、最后"><a href="#四、最后" class="headerlink" title="四、最后"></a>四、最后</h2><p>这里附上相关的dom思维导图，来自网上，也想自己做一份，感觉网上已经比较齐全了；</p>
+<p><img src="/static/images/2018-07-03/17.gif" alt=""></p>
+<p>其实也是自己对所学的DOM基本操作的一个总结，除了以上所说的，还有其他DOM API可以参考，同时最重要的需要考虑不同浏览器的不同DOM操作的兼容性。</p>
+<p>好了，现到这里，觉得不错的可以点个赞哈~。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/前端/">前端</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/总结/">总结</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

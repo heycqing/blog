@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>由于使用错误的函数，而和数据库发生了一段有趣的故事 | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="为了一个小公司的一个录入系统，我在使用angular.js时，发现$http无法使用，但由于急需，暂时没有想到解决办法，就急匆匆使用了setinverter这个函数来获取数据库中的数据，遍历出来；">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="由于使用错误的函数，而和数据库发生了一段有趣的故事">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>由于使用错误的函数，而和数据库发生了一段有趣的故事</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2017-12-21/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-12-21T07:11:46.000Z">
+          2017-12-21
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/static/images/2017-12-21/title.png" alt=""> </p>
+<p>为了一个小公司的一个录入系统，我在使用<code>angular.js</code>时，发现$http无法使用，但由于急需，暂时没有想到解决办法，就急匆匆使用了<code>setinverter</code>这个函数来获取数据库中的数据，遍历出来；<br><a id="more"></a><br>因为是早期版本的<code>angular.js(1.5.7)</code>, 使用的http也是<code>angular.js</code>里自带的模块，因为太久没看<code>angular</code>，后来上网查资料才知道，原来，<code>angular.js</code>在1.6 版本后，http的成功和失败的回调方法已经改为了 <code>then()</code>;</p>
+<p>结果是可行的，但是出现一种情况就是，能查到3张表，但是我需要同时查讯4张表，但是最后一张表的数据没有显示出来，我在远程数据库中debug的时候，看到数据库显示 t<code>oo mach connect</code>；</p>
+<p><code>too mach connect</code> 的问题就是表现为你在远程数据库上无法进入数据库，你无法通过正常的键入用户名和密码进入数据库来对数据库进行操作。</p>
+<p>这里我想到的是高性能的问题，和高并发的问题，因为我是不断向数据库去发出请求，可以看成高并发这一类类似的问题；</p>
+<p>故事就这样开始了，为了解决这个 <code>too mach connect</code> 这个问题，我决定一路走到黑，先玩玩数据库：</p>
+<p>对于一个对后端摄入不深的前端同学，看网上看到，有人推荐到说修改数据库的配置，也就是修改数据库的最大连接数：</p>
+<h2 id="修改数据库的最大连接数："><a href="#修改数据库的最大连接数：" class="headerlink" title="修改数据库的最大连接数："></a>修改数据库的最大连接数：</h2><p><strong>在这里，可以分两种情况来决定你是用修改数据库配置方式直接还是在 mysql里面使用命令来直接修改配置；</strong></p>
+<ol>
+<li>如果你的数据库在一直都是数据输进，不断地接受请求，不断响应用户交互的，这种情况下，无法直接停掉数据库来只修改配置，可以通过数据命令行来不安全修改；</li>
+<li><p>如果你的产品还是上线，或者还没被用户使用，这种情况就是这直接修改数据库的配置文件来修改最大连接数；</p>
+<p>首先，可以查看一下自己数据库的默认配置；<br>进如mysql 里使用命令：<br><code>mysql&gt; show variables like &#39;%max_connections%&#39;;</code><br><img src="/static/images/2017-12-21/1.png" alt=""> </p>
+</li>
+</ol>
+<p>这是我修改后的最大连接数，原先我的默认连接数是151的；<br>然后可以在<code>etc/init.d/my.cnf</code>  或者<code>etc/mysql/my.cnf</code>; </p>
+<p>找到 max_connections = xxxx;<br><img src="/static/images/2017-12-21/2.png" alt=""> 直接修改就行；  </p>
+<h2 id="另一种方式则是："><a href="#另一种方式则是：" class="headerlink" title="另一种方式则是："></a>另一种方式则是：</h2><p>mysql命令行修改。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql -uuser -ppassword                        (命令行登录MySQL) </span><br><span class="line">mysql&gt;show variables like <span class="string">'max\_connections'</span>;  (查可以看当前的最大连接数) </span><br><span class="line">msyql&gt;set global max\_connections=<span class="number">1000</span>;        (设置最大连接数为<span class="number">1000</span>，可以再次查看是否设置成功) </span><br><span class="line">mysql&gt;exit;                                    (推出)</span><br></pre></td></tr></table></figure></p>
+<h3 id="拓展："><a href="#拓展：" class="headerlink" title="拓展："></a>拓展：</h3><ol>
+<li>查看当前连接数（最高并发数）；</li>
+</ol>
+<p><code>mysql&gt; show status like &#39;Threads%&#39;;</code><br> <img src="/static/images/2017-12-21/3.png" alt="">       </p>
+<p><code>Threads_connected</code> 表示当前连接时；</p>
+<p><code>Threads_running</code> 表示并发数；</p>
+<p>参照资料：</p>
+<p>改变最大连接数  <a href="http://blog.csdn.net/sd4015700/article/details/50351045" target="_blank" rel="noopener">http://blog.csdn.net/sd4015700/article/details/50351045</a></p>
+<p>重启和关闭mysql <a href="http://blog.csdn.net/yonghutwo/article/details/52248864" target="_blank" rel="noopener">http://blog.csdn.net/yonghutwo/article/details/52248864</a></p>
+<p>查找文件：<a href="https://www.cnblogs.com/sunleecn/archive/2011/11/01/2232210.html" target="_blank" rel="noopener">https://www.cnblogs.com/sunleecn/archive/2011/11/01/2232210.html</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/mysql/">mysql</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

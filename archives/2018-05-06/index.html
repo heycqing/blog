@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>使用javascript一样可以做在线算法编程 | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="这是一张展示图片，以下是正文(点击标题进入正文)">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="使用javascript一样可以做在线算法编程">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>使用javascript一样可以做在线算法编程</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2018-05-06/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-05-06T02:52:40.000Z">
+          2018-05-06
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="/static/images/2018-05-06/1.png" alt="首屏图片"></p>
+<blockquote>
+<p>这是一张展示图片，以下是正文(点击标题进入正文)</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="基于node的readline一样可以使用标准流的输入输出"><a href="#基于node的readline一样可以使用标准流的输入输出" class="headerlink" title="基于node的readline一样可以使用标准流的输入输出"></a>基于node的readline一样可以使用标准流的输入输出</h2><p>对于大学生在刚开始学习c ,c++, java的时候，写着hello word的代码，然后在命令框中输入输出； 基于很多算法的学习，在我短浅的认识中，身边的同学都是使用 c， c++，甚至是java去写； 很多算法题目中的输入描述和输出描述 例如牛客网上的算法题：<br><img src="/static/images/2018-05-06/1.png" alt=""><br>类似于这种的东西，在杭州acm的算法题目也是。<br>诀窍——使用nodejs内置封装好的readline模块；</p>
+<h3 id="1-readline-模块-【逐行读取】"><a href="#1-readline-模块-【逐行读取】" class="headerlink" title="1.readline 模块 【逐行读取】"></a>1.readline 模块 【逐行读取】</h3><blockquote>
+<p>readline主要的功能是提供了一个可以从可读流中读取数据；</p>
+</blockquote>
+<p>这里可以对nodejs的 <a href="https:/www.cnblogs.com/yingge/p/5755218.html" target="_blank" rel="noopener">可读流和可写流</a> 进行深入研究 </p>
+<h3 id="2-如何使用readline？"><a href="#2-如何使用readline？" class="headerlink" title="2.如何使用readline？"></a>2.如何使用readline？</h3><p>一个基本的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入readline模块 </span></span><br><span class="line"><span class="keyword">const</span> readline = <span class="built_in">require</span>(<span class="string">'readline'</span>); </span><br><span class="line"><span class="comment">//创建readline接口实例 </span></span><br><span class="line"><span class="keyword">const</span> option =&#123; <span class="attr">input</span>:process.stdin, <span class="attr">output</span>:process.stdout, <span class="attr">prompt</span>:<span class="string">'&gt;&gt;'</span> &#125; </span><br><span class="line"><span class="keyword">const</span>  rl = readline.createInterface(option); </span><br><span class="line">rl.question(<span class="string">'你觉得js的这个模块怎么样？'</span>, (answer) =&gt; &#123; </span><br><span class="line">  <span class="comment">// 对答案进行处理 </span></span><br><span class="line">  <span class="comment">// 注意：log中的要使用  ``  而不是  ''; </span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`你觉得：<span class="subst">$&#123;answer&#125;</span>`</span>); <span class="comment">// 关闭标准流 rl.close(); </span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p>  详情可以点击我的github的<a href="https://github.com/heycqing/data-structure/blob/master/standard/readline_demo.js" target="_blank" rel="noopener">readline_dome.js</a></p>
+<h3 id="3-进一步扩展去应用"><a href="#3-进一步扩展去应用" class="headerlink" title="3.进一步扩展去应用"></a>3.进一步扩展去应用</h3><h4 id="3-1例如做一个简单的命令行界面；"><a href="#3-1例如做一个简单的命令行界面；" class="headerlink" title="3.1例如做一个简单的命令行界面；"></a>3.1例如做一个简单的命令行界面；</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 来自官方例子实现的命令界面； </span></span><br><span class="line"><span class="keyword">const</span> readline = <span class="built_in">require</span>(<span class="string">'readline'</span>); </span><br><span class="line"><span class="keyword">const</span> rl = readline.createInterface(&#123; <span class="attr">input</span>: process.stdin, <span class="attr">output</span>: process.stdout, <span class="attr">prompt</span>: <span class="string">'input&gt; '</span> &#125;); </span><br><span class="line">  <span class="comment">// rl.prompt() 方法会在 output 流中新的一行写入 readline.Interface 实例配置后的 prompt，用于为用户提供一个可供输入的新的位置。 </span></span><br><span class="line">rl.prompt(); </span><br><span class="line">  <span class="comment">// 'line'事件是 获取用户输入的值直到按下【return / enter】 按键；\\n、\\r 或 \\r\\n </span></span><br><span class="line">rl.on(<span class="string">'line'</span>, (line) =&gt; &#123; </span><br><span class="line">  <span class="comment">// ob.trim()==&gt;从字符串中移除前导空格、尾随空格和行终止符。 </span></span><br><span class="line">  <span class="keyword">switch</span> (line.trim()) &#123; </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'hello'</span>: </span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'world!'</span>);</span><br><span class="line">      <span class="keyword">break</span>; </span><br><span class="line">    <span class="keyword">default</span>: </span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`你输入的是：'<span class="subst">$&#123;line.trim()&#125;</span>'`</span>); </span><br><span class="line">      <span class="keyword">break</span>; </span><br><span class="line">      &#125; </span><br><span class="line">  rl.prompt(); </span><br><span class="line">&#125;).on(<span class="string">'close'</span>, () =&gt; &#123; <span class="built_in">console</span>.log(<span class="string">'再见!'</span>); </span><br><span class="line">  <span class="comment">//推出标准流； process.exit(0);</span></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="3-2类似于牛客网编程的例子；"><a href="#3-2类似于牛客网编程的例子；" class="headerlink" title="3.2类似于牛客网编程的例子；"></a>3.2类似于牛客网编程的例子；</h4><blockquote>
+<p>这是一个单行读取的demo</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> readline = <span class="built_in">require</span>(<span class="string">'readline'</span>); </span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>) </span><br><span class="line"><span class="comment">// 单行读取； </span></span><br><span class="line"><span class="keyword">const</span> options=&#123; <span class="attr">input</span>:process.stdin, <span class="attr">output</span>:process.stdout &#125; </span><br><span class="line"><span class="keyword">const</span> rl = readline.createInterface(options); </span><br><span class="line"><span class="comment">// 单行读取； </span></span><br><span class="line">rl.on(<span class="string">'line'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">line</span>)</span>&#123; line.trim(); </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`你输入的值(移除前导空格、尾随空格和行终止符):<span class="subst">$&#123;line.trim()&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这是一个多行读取的demo</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> readline = <span class="built_in">require</span>(<span class="string">'readline'</span>); </span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>) <span class="comment">// 多行读取； </span></span><br><span class="line"><span class="keyword">const</span> options=&#123; <span class="attr">input</span>:process.stdin, <span class="attr">output</span>:process.stdout &#125; </span><br><span class="line"><span class="keyword">const</span> rl = readline.createInterface(options);</span><br><span class="line"><span class="comment">// 多行读取 </span></span><br><span class="line"><span class="comment">// 多行处理的思路是：1.需要设定未开始读取的行数标志，并且如果开始读取的第一行是n行的行数；</span></span><br><span class="line"><span class="comment">//                2.需要通过判断是否已经到了设定的行数，若到了则只需在里面处理相关的算法逻辑；</span></span><br><span class="line"><span class="keyword">var</span>  n = <span class="number">-1</span>; </span><br><span class="line"><span class="keyword">var</span> sum = <span class="function">(<span class="params">a,b</span>)=&gt;</span>a+b; <span class="keyword">var</span> arr =[]; </span><br><span class="line">rl.on(<span class="string">'line'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">line</span>)</span>&#123; </span><br><span class="line">  <span class="comment">// 表示已经在读取第一行的n行数； </span></span><br><span class="line">  <span class="keyword">if</span>(n == <span class="number">-1</span>)&#123; </span><br><span class="line">    <span class="comment">// 类型转换和去除首位空格和终止符；并把行数赋值给n; </span></span><br><span class="line">    n = <span class="built_in">parseInt</span>(line.trim()); </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'n:'</span>+n) </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span>&#123; </span><br><span class="line">      <span class="comment">// 存入数组； </span></span><br><span class="line">      arr.push(line.trim()); </span><br><span class="line">      <span class="keyword">if</span>(n == arr.length)&#123; </span><br><span class="line">        <span class="comment">// 这里是执行你要的代码； </span></span><br><span class="line">        <span class="comment">//    </span></span><br><span class="line">        <span class="keyword">var</span> result = arr[<span class="number">1</span>]; </span><br><span class="line">        <span class="keyword">var</span> result = sum(arr[<span class="number">0</span>],arr[<span class="number">1</span>]); </span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"result:"</span>+result) </span><br><span class="line">        <span class="comment">//恢复没读取状态； </span></span><br><span class="line">        arr.length=<span class="number">0</span>; n=<span class="number">-1</span>; </span><br><span class="line">      &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>来自在牛客网上在线编程的痛点，由于一开始在javascript使用算法编程，不太懂得js的输入输出流， 做起来在这上面花了不少时间 - -!  </p>
+<p>[nodejs] <a href="http://nodejs.cn/api/readline.htmlnodejs" target="_blank" rel="noopener">http://nodejs.cn/api/readline.htmlnodejs</a><br>[console.log] <a href="https://segmentfault.com/a/1190000012957199#articleHeader0console.log" target="_blank" rel="noopener">https://segmentfault.com/a/1190000012957199#articleHeader0console.log</a><br>[ob.trim()] <a href="https://msdn.microsoft.com/library/ff679971(v=vs.94).aspx" target="_blank" rel="noopener">https://msdn.microsoft.com/library/ff679971(v=vs.94).aspx</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/node/">node</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

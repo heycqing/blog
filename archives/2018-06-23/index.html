@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>简述线程和进程 | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="本文写于在经历不少项目的愈来愈多发现线程和进程的重要性。「属于操作系统的知识」">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="简述线程和进程">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>简述线程和进程</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2018-06-23/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-06-23T08:16:52.000Z">
+          2018-06-23
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>本文写于在经历不少项目的愈来愈多发现线程和进程的重要性。「属于操作系统的知识」<a id="more"></a><br>在一次项目中，我使用node去编写了一个服务（server A），使用pm2去持续运行这个服务，接着我又写了一个node服务（server B），又用pm2去持续运行第二个服务，但是我的服务器CPU是单核的，所以严格来说一次只能跑一个服务（server A 或者 server B），另外一个服务必然处于就绪状态，等待进入。</p>
+<h4 id="这里简单分析一下："><a href="#这里简单分析一下：" class="headerlink" title="这里简单分析一下："></a>这里简单分析一下：</h4><ul>
+<li>1、Pm2 是一个node的进程管理器，这里可以忽略；</li>
+<li>2、server A 或者server B 都是一个程序，或者说是一个进程；</li>
+<li>3、CPU的数量决定着可运行进程的多少；</li>
+</ul>
+<h4 id="简单梳理一下知识定义："><a href="#简单梳理一下知识定义：" class="headerlink" title="简单梳理一下知识定义："></a>简单梳理一下知识定义：</h4><h4 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h4><p>进程是正在进行的程序的实例，1个进程就是1个正在进行的程序，2个进程就是2个正在进行的程序，1个程序被运行2遍也是2个进程。<br>单核处理器（CPU）一次只能处理一个进程，但是它是被很多个进程一起共享的，所以在决定使用哪一个进程的时候就归调度算法来管理，其他没被进行的进程就得等待分配。<br>像上文的例子说到的，server A 或者server B 被运行一次就算是一个进程，但是由于我的服务器是单核的，所以server A 和server B是不可能同时都被CPU处理，只能A先B后，或者B先A后，由调度算法来管理。</p>
+<h4 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h4><p>线程是进程的一个执行序列，「简单来说，就是程序代码的执行顺序和执行指令」，相当于在一个进程中又划分了很多个小的进程，而这些进程就被称为线程。<br>一个进程可以被很多个线程共享，可知犹如一个进程包含了很多线程。<br>像server A 是一个进程，是用js编写的，所以是一个单线程，在这个程序里，会按着server A里面的代码按照一定的执行顺序来执行代码。<br>「nodeJs是一个单线程，虽然它的底层是由多线程组成的」。</p>
+<h4 id="两者的区别："><a href="#两者的区别：" class="headerlink" title="两者的区别："></a>两者的区别：</h4><ul>
+<li>1、线程是调度的基本单位 ，进程是资源分配的基本单位</li>
+<li>2、进程之间互相独立，通信困难而且消耗资源大，可以使用管道，信号，套接字，共享内存，消息队列等方法通信。线程由于共享同一进程，所以通信简单而且消耗资源少，可以使用读写进程数据段来通信。      </li>
+<li>3、由于进程之间互相独立，进程切换，需要保持上下文的一致，所以切换满；相比较线程由于共享同一线程的上下文，所以要快。</li>
+</ul>
+<p>总结：一个处理器（CPU）有着很多进程，一个进程有着很多线程。<br>本文作为一个简单的讲诉，主要归纳一下进程和线程的知识点，和作为js运行机制的一个小拓展。<br>详细的资料请阅读《现代操作系统》。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/操作系统/">操作系统</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/进程和线程/">进程和线程</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

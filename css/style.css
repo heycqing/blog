@@ -517,7 +517,7 @@ article {
   padding: 8rem 0;
 }
 article a {
-  color: #f03838;
+  color: #51aded;
 }
 article:not(:first-child):before {
   content: '';
@@ -533,7 +533,7 @@ article blockquote {
   margin: 6rem 2rem;
   padding-left: 15px;
   line-height: 2rem;
-  border-left: 4px solid #f03838;
+  border-left: 4px solid #51aded;
 }
 article .article-title {
   position: relative;
@@ -574,7 +574,7 @@ article .article-top-meta a {
   color: #9e9e9e;
 }
 article .article-top-meta a:hover {
-  color: #f03838;
+  color: #51aded;
 }
 article .article-top-meta a time {
   font-style: italic;
@@ -623,7 +623,7 @@ article .article-footer .article-meta a {
   color: #9e9e9e;
 }
 article .article-footer .article-meta a:hover {
-  color: #f03838;
+  color: #51aded;
 }
 article .article-footer .article-meta i {
   vertical-align: middle;

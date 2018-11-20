@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>javascript的运行机制 Event loop | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="一、简述。​ 最近有一直在对一个看似简单却很复杂的问题在不断思考，复杂是在于它的广度和深度都很大，对自己影响很大。">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="javascript的运行机制 Event loop">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>javascript的运行机制 Event loop</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2018-07-01-19/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-07-01T11:36:28.000Z">
+          2018-07-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="一、简述。"><a href="#一、简述。" class="headerlink" title="一、简述。"></a>一、简述。</h2><p>​ 最近有一直在对一个看似简单却很复杂的问题在不断思考，复杂是在于它的广度和深度都很大，对自己影响很大。<br><a id="more"></a><br>​ 关于Javascript的运行机制，正好也是其中的一个范畴，因为在思考那个问题，刚好想着可以巩固一下之前学习过的东西，所以想作为一个巩固旧知识，作为一个学习笔记分享出来，希望有不妥的地方，请高手们指出，大家一起进步哈 💡</p>
+<p>之前写的3篇文章也是从这里衍生，拓展开的：</p>
+<p><a href="/archives/2018-07-01/index.html">⚔️同步调用回调函数VS异步调用回调函数</a></p>
+<p><a href="/archives/2018-06-28/index.html">⛓简述同步与异步、阻塞与非阻塞</a></p>
+<p><a href="/archives/2018-06-23/index.html">⛓简述线程和进程</a></p>
+<h2 id="二、javascrtp是什么？"><a href="#二、javascrtp是什么？" class="headerlink" title="二、javascrtp是什么？"></a>二、javascrtp是什么？</h2><p><strong>​ javascript是一门单线程的语言，意思即是只有一个主线程，在同一时间内只能运行一个任务，后续如果有其他任务的话，得要排队依次进行。</strong></p>
+<p><strong>到了现在javasrcipt是分客户端的js和服务端的js，但是这里主要是讲js的运行机制，目标为javascript解析引擎；</strong></p>
+<p>💡何为javascript解析引擎？javascript解析引擎是指能一段js代码解释成OS能运行的语言，并且可以准确地得出这一段js代码运行的结果。</p>
+<p>js解析引擎一般出现在浏览器中，现在也可以运行在服务端的V8上，这里没有深入去探究其内核是什么，只是单纯的探究一下它的运行机制，它是包含在客服端js和服务端js里的。 下面是摘自网上的一张关于js解析引擎和其执行的内核或者平台的对照表。</p>
+<p><img src="/static/images/2018-07-01-19/1.png" alt=""></p>
+<p>  我个人自己也做了一些对比，但是只是对于客户端的js（也就是依赖于浏览器运行的js）和服务端的js的一些比较。如下表格 <img src="/static/images/2018-07-01-19/2.jpeg" alt=""></p>
+<p>从上表可以看出，两者的事件运行是不一样的、有区别的，因为他们依赖的宿主环境不一样。</p>
+<p>但是在我看来，它们也有相同的地方，同为使用javascript的语法，在js层面的运行机制是基于js的解析引擎的，而且js解析引擎是被包含在客户端和服务端的，即Browser、Headless Browser or Runtime。 都说javascript是一门单线程的语言，在前端工程师们看来，运行在js上的任务主要是分为同步任务和异步任务，（对同步异步概念的可以看一下这里：<a href="/archives/2018-06-28/index.html">⛓简述同步与异步、阻塞与非阻塞</a>）。但是由于js只有一个线程，所以js的设计者设计了一个Event Loop。 </p>
+<p>这部分的内容看不懂没关系，影响不大，主要是对js运行机制相关的只是涉及一下，有一个认知方便后续的理解，看不懂没关系，可以直接看Part 3。  </p>
+<h2 id="三、Event-Loop"><a href="#三、Event-Loop" class="headerlink" title="三、Event Loop"></a>三、Event Loop</h2><p>在开始这一部分之前，其实也可以通过04年的一个演讲视频来理解，我个人觉得是有收益良多的。<br>传送门：<a href="https://vimeo.com/96425312" target="_blank" rel="noopener">Help, I’m stuck in an event-loop</a> 需要翻墙，全程没字幕，前方高能。 </p>
+<p>上文也有提及到同步任务和异步任务，<strong>js是一个单线程，那么它这一个线程就担任了主线程，同步任务放在主线程执行，那么形成了一个执行栈，除此之外，同步安定好了，还有异步，那么就有一个任务队列来存放相关的任务</strong>，那其中是一个怎么样的运行流程，下面会详细讲解一下。  </p>
+<h3 id="用我自己的话来讲一下event-loop"><a href="#用我自己的话来讲一下event-loop" class="headerlink" title="用我自己的话来讲一下event loop"></a>用我自己的话来讲一下event loop</h3><ul>
+<li><p>1、当任务进来时，js解析引擎会分辨是同步任务还是异步任务，如果是同步任务，就一并放进主线程 (也就是执行栈Stack)去同步执行；如果是异步任务，则在事件表里不阻塞进行，遇到回调函数就注册在任务队列(callback queue)中。 </p>
+</li>
+<li><p>2、放在任务队列中的回调函数需要等待主线程中的同步任务完成方可执行，这时候同步任务会在主线程中同步阻塞执行，等到所有在主线程中的任务执行完，也就是执行栈清空了的时候，触发让任务队列内的回调函数先入先出地进入到主线程中执行。 </p>
+</li>
+<li><p>3、第1步，第2步一直循环，直到所有任务都执行完。</p>
+</li>
+</ul>
+<p>关于什么是回调函数，参考我的这篇博客：<a href="/archives/2018-07-01/index.html">⚔️同步调用回调函数VS异步调用回调函数</a></p>
+<p>关于同步异步阻塞非阻塞的关系，请参考一下这篇博客：<a href="/archives/2018-06-28/index.html">⛓简述同步与异步、阻塞与非阻塞</a></p>
+<p>主线程的执行栈 ？</p>
+<p>如下图（截取自演讲视频的讲解）</p>
+<p><img src="/static/images/2018-07-01-19/3.png" alt=""></p>
+<h4 id="执行栈，先入后出。"><a href="#执行栈，先入后出。" class="headerlink" title="执行栈，先入后出。"></a>执行栈，先入后出。</h4><p>第一个进入的是要执行的函数，（途中就是printSquare函数），然后就是依次调用的函数入栈，运行完就依次出栈，直到执行栈为空。</p>
+<h3 id="完整的Event-Loop"><a href="#完整的Event-Loop" class="headerlink" title="完整的Event Loop"></a>完整的Event Loop</h3><p>如下图，(截取自演讲视频的讲解）</p>
+<p><img src="/static/images/2018-07-01-19/4.png" alt=""></p>
+<p>结合我刚才所说的，再去看图，便会很好地理解。 好吧接下来来一个例子来证明一下是不是真的懂了js的运行机制。如下图。</p>
+<p><img src="/static/images/2018-07-01-19/5.png" alt=""></p>
+<p>先不要看答案，自己可以猜想一下。   答案如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span> <span class="number">1</span></span><br><span class="line">promise</span><br><span class="line"><span class="built_in">console</span> <span class="number">2</span></span><br><span class="line">then</span><br><span class="line">setTimeout</span><br></pre></td></tr></table></figure></p>
+<p><img src="/static/images/2018-07-01-19/6.png" alt=""></p>
+<p>这样我归类出异步任务就可以轻而易举地判断了 于是我开始做了一笔记，把一些常用的异步操作分类；</p>
+<blockquote>
+<p>客户端js:<br>1、ajax一类的请求事件；<br>2、定时器：setTimeout 和 setInterval;</p>
+<p>服务端js:<br>3、process.nextTick 这一类；<br>4、数据库操作、文件操作、网络操作；</p>
+</blockquote>
+<p>嗯….我又发现了一个问题：如果我可以根据它函数的设计来判断是不是异步的，岂不是很省时间，毕竟是理工科的。</p>
+<p>好的，于是我发现了阮一峰老师有对 js的异步编程 有了一个归类，</p>
+<p>这里是一个链接：《js的异步编程》<a href="http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html</a></p>
+<pre><code>但是，同步这边没问题了，那么异步会不会存在一个优先级的关系？ 在查找相关资料之后，发现在真的是存在一个用来区分更细节的定义：**宏任务和微任务**
+</code></pre><blockquote>
+<ul>
+<li><p>macro-task(宏任务)：包括整体代码script，setTimeout，setInterval</p>
+</li>
+<li><p>micro-task(微任务)：Promise，process.nextTick    </p>
+</li>
+</ul>
+</blockquote>
+<p>虽然说是又在细分开来了宏任务和微任务，但是它们还是依然存在事件循环中，是被包裹在Event loop中。</p>
+<p>这里所说的宏任务和微任务是指，在进行新的宏任务之前，要先检查是否有存在可执行的微任务，如果有就执行所有微任务，再去执行新的宏任务，如果没有就直接执行宏任务。</p>
+<p>一开始我也是不相信的，但是把这个带进去的刚才的例子的话，是行的通的。</p>
+<p><img src="/static/images/2018-07-01-19/7.png" alt=""></p>
+<p>  我用自己的话梳理一下过程</p>
+<ul>
+<li>1、整段代码作为一个宏任务执行，遇到console 1 就执行； </li>
+<li>2、遇到setTimeout 异步函数 ，把它放到宏任务中，并且把它的回调函数注入到任务队列中，等待执行； </li>
+<li>3、遇到 Promise 就执行 console.log(‘promise’)，它的then函数则作为微任务注册到当前的宏任务的任务队列中； </li>
+<li>4、遇到console 2 执行； </li>
+<li>5、回过头来看，这段宏任务中还有then这个微任务，就把then执行了；好了，这段宏任务执行完了; </li>
+<li><p>6、回过头来看，可以开始新的宏任务，发现setTimeout已经被放到宏任务中了，那就执行setTimeout里的函数；</p>
+<p>小秘诀</p>
+</li>
+</ul>
+<h4 id="关于setTimeout的延时和setInterval的不停止"><a href="#关于setTimeout的延时和setInterval的不停止" class="headerlink" title="关于setTimeout的延时和setInterval的不停止"></a>关于setTimeout的延时和setInterval的不停止</h4><ul>
+<li>1、setTimeout的延时 setTimeout也是一个异步操作，其回调函数也有放进任务队列的，其中它延时的含义就是在当前主线程执行完之后，延时多久才执行这个回调函数，包括延时0，也是意味着当主线程清空之后最快可空闲的时间执行，并不是立即执行。 </li>
+<li>2、setInterval的不停止 setInterval的不停止，和setTimeout一样是一个异步操作，不停止意味着不停对任务队列注册新的回调函数。</li>
+</ul>
+<blockquote>
+<p>两者逃过异步的身份，也就意味着都需要等待主线程执行完才能执行当前它们注册的回调函数。</p>
+</blockquote>
+<h2 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h2><p>好的，js的event loop差不多大概就是这样子的。 这次的学习旅程，学到了很多新的知识，当然也有旧的知识，对旧知识的刷新和回顾，结合新知识让自己对js、浏览器、node等等很多方面有着新的认识。 作为一次读书笔记，我觉得很有必要分享出来大家一起观摩学习，如果有不正确的地方和欢迎加我微信，指出我的错误，暂时没有开放评论。</p>
+<p>如果觉得不错的话，可以点个赞，以后会有更多好玩的东西分享出来给大家哈。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/javascript/">javascript</a>, <a href="/categories/javascript/前端/">前端</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/js/">js</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

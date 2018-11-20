@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>LOG（文末有彩蛋） | Cqing 博客</title>
+
+  
+  <meta name="author" content="Cqing">
+  
+
+  
+  <meta name="description" content="​ 关于命令行，我们也见怪不怪了，作为一个程序员👨‍💻‍你一定要会使用命令行，当年年轻，以为前端不用使用命令行，后来一入前端深似海。（文末有一个彩蛋）">
+  
+
+  
+  <meta name="keywords" content="heycqing,cing,伍思卿,前端学习,北京理工大学珠海学院，">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="LOG（文末有彩蛋）">
+
+  <meta property="og:site_name" content="Cqing 博客">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Cqing 博客</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>LOG（文末有彩蛋）</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/archives/2018-07-21/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-07-21T06:21:41.000Z">
+          2018-07-21
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>​ 关于命令行，我们也见怪不怪了，作为一个程序员👨‍💻‍你一定要会使用命令行，当年年轻，以为前端不用使用命令行，后来一入前端深似海。（文末有一个彩蛋）<br><a id="more"></a><br>​ 在电影里的黑客都是非常skr的，一般就是在一个阴暗的空间里排放着一排电脑显示屏，黑客随手一敲，不同的显示屏里就显示出各种各种酷炫吊炸天的操作，是不是很有画面感。 ​ 今天这里我分享就是这样的操作，当然不是分享各种渗透，端口扫描，中间人攻击这些高级技巧，今天分享的是存在于各种<strong>类unix操作系统</strong>的小技巧，可提高效率可玩乐可装b，旅行居家必备。 <img src="/static/images/2018-07-21/0.gif" alt=""> ​  ​<br>上图我进行的操作是在命令行里输入我自定义的命令 <code>write</code> ，启动我的写作工作台，就是自动打开了我写作常用的3个app，当然不全是哈，然后在命令行里出现了 ASCLL 喷火龙图案。(宠物小精灵中的喷火龙有没有 ⁉️)  </p>
+<h2 id="回归正题"><a href="#回归正题" class="headerlink" title="回归正题"></a>回归正题</h2><p>​ 好了，其实上面的 <code>write</code> 是我懒才自己自定义的命令，方便一次性打开写作基本app，不想一个一个软件打开。  </p>
+<h3 id="简单操作"><a href="#简单操作" class="headerlink" title="简单操作"></a>简单操作</h3><p>​ 想要进行的这样的操作其实很简单，你只要知道两个东西就行： 1、<code>.bash_profile</code> 2、<code>alias</code> 不知道这两个东西的可以自行谷歌百度，但是不知道没关系，跟着我有肉吃。<br><img src="/static/images/2018-07-21/1.gif" alt=""> ​ </p>
+<h3 id="来个简单的例子"><a href="#来个简单的例子" class="headerlink" title="来个简单的例子"></a>来个简单的例子</h3><p>​ 需求：由于我需要发表一些文章的时候，会打开登陆我的管理后台，需要访问我的博客，但是我太懒了，不想打开浏览器再输入我的域名(⚠️小广告：<a href="wusiqing.com">wusiqing.com</a>) ，怎么办？ ​ ​ 操作: （以我的 mac 操作系统为例，只要是类unix系统即可，例如linux）</p>
+<ol>
+<li>打开你的终端，linux 或者mac都行，输入 <code>vim ~/.bash_profile</code>;</li>
+<li>进入编辑器之后，按 <code>i</code> 进入编辑模式，然后输入<code>alias &lt;你的命令&gt;=&#39;&lt;系统命令&gt;&#39;</code> ，按照需求，我应该是这样输入 <code>alias cqing=&#39;open http://www.wusiqing.com&#39;</code> ,(⚠️ 记得<code>&lt;你的命令&gt;</code> 和<code>=</code> 不要有空格)；</li>
+<li>然后按下 <code>esc</code> ，输入 <code>:wq</code> ，回车，退出vim编辑器，返回终端界面。</li>
+<li>接着输入 <code>source ~/.bash_profile</code> ，让你刚才的配置生效。</li>
+<li>在终端输入 <code>cqing</code> 命令，这就可以完成了需求，在终端打开我的博客。图示：<br><img src="/static/images/2018-07-21/2.gif" alt="">   </li>
+</ol>
+<p>加个需求：我看了第一个gif里面有喷火龙的，我也想要，怎么弄？ 操作： 这时候就需要一个插件了，一个有趣的插件 <code>cowsay</code> ，em…不用怀疑，就是<code>牛说</code> ，名字很好记。</p>
+<ol>
+<li>终端下载 <code>cowsay</code> ，在终端输入 <code>npm install -g cowsay</code> ，如果你没有<code>npm</code> ，没关系，你可以直接输入 <code>brew install cowsay</code> 直接下载。</li>
+<li>终端显示安装完成之后，你可以输入<code>cowsay halo</code>;<br><img src="/static/images/2018-07-21/3.png" alt=""></li>
+<li>还没完成需求哇，我需要一条龙，好吧 ，你可以输入 <code>cowsay -f dragon halo</code> ; (⚠️除了说，当然还有想呀，这个插件有两个命令 <code>cowsay</code> <code>cowthink</code>)<br><img src="/static/images/2018-07-21/4.png" alt=""> </li>
+</ol>
+<p>需求：但是我想要达到你那个样子，输入命令之后，打开了应用又输出了ASCLL动画，怎么办？ 操作：</p>
+<ol>
+<li>其实我们已经得到两条命令了，分别是打开我博客的命令 <code>open http://www.wusiqing.com</code> ，和打印ASCLL 动画的命令 <code>cowsay -f dragon halo</code>；</li>
+<li>有了2个命令，当然是连起来呀！这时候需要的是 <code>&amp;&amp;</code> 和命令啦，把它们糅合在一起就是，这样的一坨代码 <code>alias cqing=&#39;open http://www.wusiqing.com &amp;&amp; cowsay -f dragon halo&#39;</code>；</li>
+<li>图示：<img src="/static/images/2018-07-21/5.gif" alt=""></li>
+</ol>
+<h3 id="继续follow-me🔎"><a href="#继续follow-me🔎" class="headerlink" title="继续follow me🔎"></a>继续follow me🔎</h3><p>好了，到这里感觉是差不多了？没看懂刚才的？没事文末有个小总结，还有个小彩蛋喔！忘了分享怎么打开应用，来吧，follow me🔎. 我们到现在已经知道 <code>alias</code> <code>open</code> 的用法了，然后我们需要用命令行去打开应用。 完全不用把应用固定在程序钨上，让自己的程序钨简约好看。<img src="/static/images/2018-07-21/6.png" alt="">  </p>
+<h4 id="例如我打开-微信-这个小应用；"><a href="#例如我打开-微信-这个小应用；" class="headerlink" title="例如我打开 微信 这个小应用；"></a>例如我打开 <code>微信</code> 这个小应用；</h4><p>操作：</p>
+<ol>
+<li>打开你的<code>.bash_profile</code> ，操作 <code>vim ~/.bash_profile</code> ；</li>
+<li>进入编辑器之后，按 <code>i</code> 进入编辑模式；</li>
+<li>在应用中找到<code>微信</code> 。如何找到：可以在程序钨中找到微信图标，右击，点击<code>选项</code> ，选择<code>在访达显示</code> ；</li>
+<li><img src="/static/images/2018-07-21/7.png" alt=""></li>
+<li>于是我们会在访达直接看到 <code>微信</code> 的图标，然后可以直接把 <code>微信图标</code> 托拉到终端中，记得用上你的 <code>alias</code> 和 <code>open</code> 命令 ，然后我们会看到这样操作，如下图：</li>
+<li><img src="/static/images/2018-07-21/8.png" alt=""></li>
+<li><img src="/static/images/2018-07-21/9.png" alt=""></li>
+</ol>
+<p>图示： <img src="/static/images/2018-07-21/10.gif" alt=""></p>
+<h4 id="升级版：例如我打开我的-vs-code-代码编辑器；"><a href="#升级版：例如我打开我的-vs-code-代码编辑器；" class="headerlink" title="升级版：例如我打开我的 vs code 代码编辑器；"></a>升级版：例如我打开我的 <code>vs code</code> 代码编辑器；</h4><p>在升级版里会介绍，函数的使用和另外一种打开应用的方式； 操作： 我这里就不过多累赘了，可以参考一下我下面的截图： <img src="/static/images/2018-07-21/11.png" alt=""> 可以看到除了使用 <code>alias</code> 命令之外，还可以使用函数，函数作用不多说了，我是主流用函数的。 另外打开 <code>vs code</code> 编辑器，还可以使用这个命令 <code>VSCODE_CWD=&quot;$PWD&quot; open -n -b &quot;com.microsoft.VSCode&quot; --args $*</code> 图示我这里就不演示了，应该可以猜到结果。</p>
+<h3 id="关于艺术字"><a href="#关于艺术字" class="headerlink" title="关于艺术字"></a>关于艺术字</h3><p>在终端上除了可以使用上面说的 <code>cowsay</code> 命令之外，还可以使用 <code>figlet</code> 这个命令； 这样的图示： <img src="/static/images/2018-07-21/12.gif" alt=""> 操作：</p>
+<ol>
+<li>下载，<code>brew install figlet</code></li>
+<li>下载完成之后，就可以使用命令 <code>figlet &lt;message&gt;</code></li>
+</ol>
+<p>很多时候在写插件的时候，可以插入这个命令，配合以上的说的 <code>alias</code> ，可以显得有点高大上的。</p>
+<h3 id="关于其他的终端信息"><a href="#关于其他的终端信息" class="headerlink" title="关于其他的终端信息"></a>关于其他的终端信息</h3><p>这里稍微推荐一下几款包。<br>1、<code>sl 命令</code> ，和<code>ls</code> 命令很相似的。 这是一个gif来的，我这里稍微截图一下。<br><img src="/static/images/2018-07-21/13.png" alt=""> </p>
+<p>2、<code>neofetch</code> 命令。用来提示操作系统信息，可以更换图片和颜色，我这里是默认的样式。<br><img src="/static/images/2018-07-21/14.png" alt=""></p>
+<h3 id="我来填坑了"><a href="#我来填坑了" class="headerlink" title="我来填坑了"></a>我来填坑了</h3><p>之前有一篇文章 <a href="http://wusiqing.com/?p=387" target="_blank" rel="noopener">《你有经常打开开发者工具的习惯吗！？》</a> ，说道前端的console.log 的打印文件，其实实现很简单的，你要会两个东西：<br>1、<code>console的正确用法</code><br>2、可以使用这个网站<code>http://tool.what21.com/tool/site_asciiart.html</code> 在2操作里获取到图片之后，可以使用console把图片插入进去就可以呈现知乎招聘的log信息。 当然可以使用console的其他用法去创造自己喜欢的打印信息。</p>
+<h3 id="文末总结"><a href="#文末总结" class="headerlink" title="文末总结"></a>文末总结</h3><p>总结来说，要实现一开始的效果，只需要知道 <code>.bash_profile</code> 和 <code>alias</code> 的使用， <code>alias</code> 简单的命令 <code>alias &lt;变量名&gt;=&#39;&lt;命令&gt;&#39;</code>；<br>这样操作就不用经常性去输入很多的命令，化泛为简。<br>很多时候我们去<code>brew</code> 一些包的时候，可以使用这样的方法，例如我们一键去下载lamp的时候也是同样的原理。<br>我们可以完全自己去为自己自定义一套属于自己的命令。<br>例如我，我下班回来之后，想打开应用，但是我不想一个一个去打开这些应用，于是我自定义了<code>一套我的命令</code>，例如 <code>我的编码工作台</code> 、<code>我的写作工作台</code> 、<code>我的娱乐世界</code> 还有其他单独打开的应用。<br>👾是不是很GEEK。<br>💡还有送给所有人的一个命令 <code>listen</code> ;<br><img src="/static/images/2018-07-21/15.png" alt="">  </p>
+<h3 id="说好的文末彩蛋"><a href="#说好的文末彩蛋" class="headerlink" title="说好的文末彩蛋"></a>说好的文末彩蛋</h3><p>打开你的终端，输入以下命令 <code>telnet towel.blinkenlights.nl</code> .</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/命令行/">命令行</a>, <a href="/categories/命令行/小技巧/">小技巧</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2018 Cqing
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
