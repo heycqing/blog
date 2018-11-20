@@ -715,6 +715,7 @@ article.archive {
 }
 .archive-post .categories-archive-title {
   font-size: 1.8em;
+  margin-top: 0.5em;
 }
 .archive-post .categories-archive-title a {
   color: #000;
