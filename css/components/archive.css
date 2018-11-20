@@ -13,19 +13,22 @@ article.archive {
   color: #212121;
   margin: 0;
 }
-.archive-post .archive-title a {
+.archive-post .categories-archive-title {
+  font-size: 1.8em;
+}
+.archive-post .categories-archive-title a {
   color: #000;
 }
-.archive-post .archive-title a span {
+.archive-post .categories-archive-title a span {
   padding-bottom: 3px;
   -webkit-transition: box-shadow 0.15s;
   transition: box-shadow 0.15s;
   box-shadow: inset 0 -2px 0 rgba(240,56,56,0);
 }
-.archive-post .archive-title a:hover {
+.archive-post .categories-archive-title a:hover {
   color: #212121;
 }
-.archive-post .archive-title a:hover span {
+.archive-post .categories-archive-title a:hover span {
   box-shadow: inset 0 -2px 0 rgba(240,56,56,0.4);
 }
 .archive-post time {
