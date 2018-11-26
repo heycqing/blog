@@ -1,5 +1,14 @@
 header {
   line-height: 1.8rem;
+  position: fixed;
+  top: 0;
+  width: 1170px;
+  left: 50%;
+  margin-left: -585px;
+  background: #fff;
+  z-index: 999;
+  padding-top: 5%;
+  padding-bottom: 3%;
 }
 header .site-branding {
   text-align: center;
@@ -50,4 +59,20 @@ header .site-navigation ul li a {
   font-size: 1.6rem;
   line-height: 2rem;
   padding: 0 1rem;
+}
+.showHeader {
+  opacity: 1;
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.31, -0.13, 0, 0.85);
+  transition-delay: 0s;
+  transform: translate(0, 0);
+}
+.hiddenHeader {
+  opacity: 0;
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.31, -0.13, 0, 0.85);
+  transition-delay: 0s;
+  transform: translate(0, -50px);
 }

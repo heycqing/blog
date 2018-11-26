@@ -456,11 +456,21 @@ body .blog .content {
   box-sizing: border-box;
   max-width: 770px;
   width: 100%;
-  padding: 80px 10px 10px;
+  padding: 100px 10px 10px;
   margin: 0 auto;
+  padding-top: 10%;
 }
 header {
   line-height: 1.8rem;
+  position: fixed;
+  top: 0;
+  width: 1170px;
+  left: 50%;
+  margin-left: -585px;
+  background: #fff;
+  z-index: 999;
+  padding-top: 5%;
+  padding-bottom: 3%;
 }
 header .site-branding {
   text-align: center;
@@ -511,6 +521,22 @@ header .site-navigation ul li a {
   font-size: 1.6rem;
   line-height: 2rem;
   padding: 0 1rem;
+}
+.showHeader {
+  opacity: 1;
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.31, -0.13, 0, 0.85);
+  transition-delay: 0s;
+  transform: translate(0, 0);
+}
+.hiddenHeader {
+  opacity: 0;
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.31, -0.13, 0, 0.85);
+  transition-delay: 0s;
+  transform: translate(0, -50px);
 }
 article {
   position: relative;
@@ -1096,7 +1122,7 @@ pre .deletion {
 }
 @media (max-width: 768px) {
   .content {
-    padding-top: 20px !important;
+    padding-top: 100px !important;
   }
   article {
     padding: 2.5rem 0 !important;
