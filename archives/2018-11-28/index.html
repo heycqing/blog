@@ -107,6 +107,9 @@
 <h1 id="网络协议知识总结-「传输层」"><a href="#网络协议知识总结-「传输层」" class="headerlink" title="网络协议知识总结 -「传输层」"></a>网络协议知识总结 -「传输层」</h1><blockquote>
 <p>网络协议有着7层协议：应用层、表现层、会话层、传输层、网络层、链路层、物理层；<br><a id="more"></a><br>往往用到的是<strong>传输层</strong>、<strong>应用层</strong>这几层的知识点，毕竟这是软件开发，尤其是web开发中最重要而必须的知识点。</p>
 </blockquote>
+<h2 id="传输层是什么？"><a href="#传输层是什么？" class="headerlink" title="传输层是什么？"></a>传输层是什么？</h2><blockquote>
+<p>再传输层上是端与端之间的交互，更准确是各个端上的进程之间的数据交互。</p>
+</blockquote>
 <h2 id="传输层主要协议"><a href="#传输层主要协议" class="headerlink" title="传输层主要协议"></a>传输层主要协议</h2><p>主要包括 <code>TCP</code> / <code>UDP</code> 协议。</p>
 <h3 id="TCP-和-UDP-从属的协议栈"><a href="#TCP-和-UDP-从属的协议栈" class="headerlink" title="TCP 和 UDP 从属的协议栈"></a>TCP 和 UDP 从属的协议栈</h3><table>
 <thead>
@@ -193,8 +196,25 @@
 </tr>
 </tbody>
 </table>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
-<p>关于 TCP 连接的 3次握手 和 4次挥手，这里不做具体讲述了。<br>就是一个查缺补漏和知识补全的文章</p>
+<h2 id="一些知识"><a href="#一些知识" class="headerlink" title="一些知识"></a>一些知识</h2><h3 id="UDP-用处"><a href="#UDP-用处" class="headerlink" title="UDP 用处"></a>UDP 用处</h3><p>UDP 由于它不需要通过连接确认就可以传输，同时它消耗资源少，处理快速并且灵活，关键是即使在网络差的时候容易丢包，但是丢包数量对音频视频这类处理场景影响小，所以UDP在传输音频、视频和IP电话上的用途很广，主要是使用UDP协议。</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><blockquote>
+<p>关于 TCP 连接的 3次握手 和 4次挥手，这里不做具体讲述了。</p>
+</blockquote>
+<p>具体就不说了，这里使用<code>node</code>来说一下TCP的连接<br><br>具体代码: <a href="https://github.com/heycqing/KillTime/tree/master/nodeJs-test/node-tcp" target="_blank" rel="noopener">node-tcp</a><br><br>以下引用的node模块主要是 <code>net</code> ,专门使用在 <code>TCP</code> 上<br></p>
+<ul>
+<li><p>建立服务端</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = net.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    e.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">        e.write(<span class="string">'halo'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    e.on(<span class="string">'end'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'连接断开'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    e.write(<span class="string">'welcome!'</span>)</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">8124</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'服务建立'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立客户端</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> client = net.connect(&#123;</span><br><span class="line">    port: <span class="number">8124</span></span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端连接'</span>);</span><br><span class="line">&#125;)</span><br><span class="line">client.on(<span class="string">'data'</span> ,<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'接受到服务端给的信息:'</span>+ data.toString());</span><br><span class="line">&#125;)</span><br><span class="line">client.on(<span class="string">'timeout'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'当前连接已经被闲置！'</span>)</span><br><span class="line">&#125;)</span><br><span class="line">client.on(<span class="string">'end'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'连接关闭！'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="思路是"><a href="#思路是" class="headerlink" title="思路是"></a>思路是</h3><p>建立服务端和客户端,服务端调用 <code>wirte()</code> 发送数据，客户端监控进程，当发现服务端有数据发送来时，客户端输出从服务端中得到数据；<br><br>当服务端进程监控到客户端关闭时，触发 <code>end</code> 事件，直接输出<strong>连接断开</strong></p>
+<h3 id="命令行工具"><a href="#命令行工具" class="headerlink" title="命令行工具"></a>命令行工具</h3><p>使用 <code>telnet</code> <code>nc</code> 等工具可以监控到这样的结果。</p>
+<h3 id="如何更准确看到TCP连接过程？"><a href="#如何更准确看到TCP连接过程？" class="headerlink" title="如何更准确看到TCP连接过程？"></a>如何更准确看到TCP连接过程？</h3><p>建议： 可以使用网络监测工具 <code>WireShark</code></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>关于为什么说传输层知识这么重要？<br><br><br>因为应用层由下层协议，也就是传输层支持的，想要高效的网络，需要从传输层上入手。</p>
+<blockquote>
+<p>就是一个查缺补漏和知识补全的文章</p>
 </blockquote>
 
       
