@@ -1,0 +1,38 @@
+body{
+    font-size: 13px;
+    font-family: "\5FAE\8F6F\96C5\9ED1","\5B8B\4F53";
+    text-align: center;
+    background: url(http://kzp.mof.gov.cn/cjcx/cjcx_bg.jpg) repeat-x #fff;
+}
+.big1 {
+    color: #053d89;
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 60px;
+}
+.big2 {
+    color: #000;
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+}
+.cjcx_jg {
+    width: 580px;
+    border-collapse: collapse;
+    font-size: 13px;
+    font-family: "\5FAE\8F6F\96C5\9ED1","\5B8B\4F53";
+}
+.cjcx_jg td {
+    border: solid 1px #bde3f4;
+    height: 34px;
+    text-align: center;
+    line-height: 24px;
+}
+.bq {
+    color: #000;
+    font-size: 14px;
+    margin-top: 100px;
+    line-height: 30px;
+}
