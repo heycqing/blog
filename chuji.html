@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>全国会计资格评价网</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <form method="post" name="form1">
+        <center class="big1">财政部会计资格评价中心<br>
+            (全国会计资格评价网)</center>
+        <center class="big2">2019年度全国会计专业技术资格考试成绩查询（初级）</center><br>
+        <table align="center" class="cjcx_jg">
+            <tbody>
+                <tr>
+                    <td>
+                        请选择您报考的省市：
+                        <select name="province">
+                            <option value="">请选择</option>
+                            <option value="11">北京</option>
+                            <option value="12">天津</option>
+                            <option value="13">河北</option>
+                            <option value="14">山西</option>
+                            <option value="15">内蒙古</option>
+                            <option value="16">辽宁</option>
+                            <option value="17">吉林</option>
+                            <option value="18">黑龙江</option>
+                            <option value="19">上海</option>
+                            <option value="20">江苏</option>
+                            <option value="21">浙江</option>
+                            <option value="22">安徽</option>
+                            <option value="23">福建</option>
+                            <option value="24">江西</option>
+                            <option value="25">山东</option>
+                            <option value="26">河南</option>
+                            <option value="27">湖北</option>
+                            <option value="28">湖南</option>
+                            <option value="29">广东</option>
+                            <option value="30">广西</option>
+                            <option value="31">海南</option>
+                            <option value="32">四川</option>
+                            <option value="33">重庆</option>
+                            <option value="34">贵州</option>
+                            <option value="35">云南</option>
+                            <option value="36">西藏</option>
+                            <option value="37">陕西</option>
+                            <option value="38">甘肃</option>
+                            <option value="39">青海</option>
+                            <option value="40">宁夏</option>
+                            <option value="41">新疆</option>
+                            <option value="42">兵团</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        证&nbsp;件&nbsp;号：
+                        <input name="sfzh" type="text" id="sfzh" size="25" maxlength="18">
+                    </td>
+                </tr>
+                <tr>
+                    <td>姓&nbsp;&nbsp;名：
+                        <input name="xm" type="text" id="xm" size="25" maxlength="40">
+                        <br>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="button" name="Submit" value="登录" onclick="chk()">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <center class="bq">版权所有：财政部会计资格评价中心<br>
+            <b style="color:#fc6217; font-weight:normal">京ICP备05002860号</b> </center>
+    </form>
+    <script>
+        function chk(){
+            var num = document.getElementById('sfzh').value
+            var name = document.getElementById('xm').value
+            console.log('name',name)
+            if(num == '34220119961007062X' && name == '谢安琪'){
+               window.open('./cxcj.html')
+
+            }else{
+                alert('请输入正确的证件号和姓名！')
+            }
+
+            // console.log('9999======')
+        }
+    </script>
+</body>
+
+</html>
