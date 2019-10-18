@@ -1,5 +1,6 @@
 (function () {
     function stopAD(){
+        // 针对 手机百度小说的广告
         var adNode = document.getElementsByClassName('afd-ad')
         var adBottomNode = document.getElementsByClassName('banner')
         var bottomOperateTop = document.getElementsByClassName('bottomOperateTop')
@@ -13,16 +14,26 @@
             bottomOperateTop[k].style.display = 'none'
         }
     }
+    
+    var originHeight = document.body.scrollHeight;
+    console.log('originHeight', originHeight)
+    stopAD()
 
     window.addEventListener('onload', function(e){
         stopAD()
     })
 
+    // 监听页面高度变化
     window.addEventListener('scroll', function (e) {
-        stopAD()        
+        var lastHeight = document.body.scrollHeight
+        console.log('lastHeight:', lastHeight)
+        if(lastHeight > originHeight){
+            originHeight = lastHeight
+            stopAD()        
+        }
     })
 
-    stopAD()
+    
 
 })()
 
