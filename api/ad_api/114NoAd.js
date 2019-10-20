@@ -11,7 +11,7 @@
         var adBottomNode = document.getElementsByClassName('mb10')
         // 悬浮的广告
         // 记得 script 标签在最后面
-        var node1 = tempBody.lastElementChild.previousElementSibling
+        var node1 = tempBody.lastElementChild
         var node2 = node1.previousElementSibling
         
       
@@ -26,6 +26,9 @@
         }
 
         if(adTop_node1 != null && adTop_node2 != null){
+            if(adTop_node1.outerHTML.indexOf('<script') != -1){
+                return
+            }
             adTopNode.removeChild(adTop_node1)
             adTopNode.removeChild(adTop_node2)
         } 
@@ -41,4 +44,4 @@
 
 })()
 
-// javascript:(function(){if(window.name){eval(window,name)}else{var s=document.createElement("script");s.type="text/javascript";s.src="https://heycqing.github.io/blog/api/ad_api/114NoAD.js";document.body.insertBefore(s,document.body.firstChild);alert("点击除去😡广告")}})();
+// javascript:(function(){if(window.name){eval(window,name)}else{var s=document.createElement("script");s.type="text/javascript";s.src="https://heycqing.github.io/blog/api/ad_api/114NoAd.js";document.body.insertBefore(s,document.body.firstChild);alert("点击除去😡广告")}})();
