@@ -48,23 +48,18 @@
     removeADRoot.prototype.stopAD = function(key) {
         // 针对 手机百度小说的广告
         let maxLength = this.maxLength()
-        console.log('maxLength:', maxLength)
         for(var i = 0; i < maxLength; i++){
             if(this.adNode[i]){
-                console.log('执行')
                 this.adNode[i].style.display = 'none'
             }
             if(this.adBottomNode[i]){
                 // if(this.adBottomNode[i].style.display !== 'none'){
                 //     return true
                 // }else{
-                    console.log('执行')
                     this.adBottomNode[i].style.display = 'none'
                 // }
             }
             if(this.bottomOperateTop[i]){
-                console.log('执行')
-                
                 // if(this.bottomOperateTop[i].style.display !== 'none'){
                 //     return true
                 // }else{
@@ -76,7 +71,6 @@
 
     removeADRoot.prototype.init = function() {
         var self = this
-        console.log('pppp')
         this.setvalue()
         this.stopAD()
         var originHeight =  document.body.clientHeight ||document.body.scrollHeight;
@@ -92,5 +86,4 @@
 
     var removeAD = new removeADRoot()
     removeAD.init()
-    console.log('没有执行？？？')
 })()
