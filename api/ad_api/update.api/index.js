@@ -17,16 +17,10 @@
     }
 
     removeADRoot.prototype.setBtnvalue = function(){
-        var modal = document.getElementsByClassName('control-wrap')[0]
         if(!this.invokeBtn && document.getElementsByClassName('invoke-btn')[0]){
             this.invokeBtn = document.getElementsByClassName('invoke-btn')[0]
-            return 'hasInvokeBtn'
-        }
-        if(!this.cancelBtn && modal){
-            if(modal.getElementsByTagName('button')[0]){
-                this.cancelBtn = modal.getElementsByTagName('button')[0]
-                return 'hasCancelBtn'
-            }
+        }else{
+            return 'done'
         }
     }
 
@@ -78,7 +72,7 @@
     removeADRoot.prototype.witeAndReadWindowName = function() {
         var windowName =  window.name.trim('')
         if (!windowName) {
-            window.name = "javascript:(function(){var s = document.createElement('script'); s.type = 'text/javascript'; var randomNumber=JSON.stringify( Math.random() * 10000).split('.')[0]; s.src = 'https://heycqing.github.io/blog/api/ad_api/update.api/index.js?'+randomNumber; document.body.appendChild(s); alert('heycqing出品去除广告')})()"
+            window.name = "javascript:(function(){var s = document.createElement('script'); s.type = 'text/javascript'; var randomNumber=JSON.stringify( Math.random() * 10000).split('.')[0]; s.src = 'https://heycqing.github.io/blog/api/ad_api/update.api/index.js?'+randomNumber; document.body.appendChild(s);})()"
         } else {
             if (window.name.indexOf('https://github.com/heycqing') || window.name.indexOf('heycqing')) {
                 eval(window.name)
@@ -126,7 +120,9 @@
     }
 
     removeADRoot.prototype.init = function() {
-        this.autoRunBtnEvent()
+        if(this.setBtnvalue() !== 'done'){
+            this.autoRunBtnEvent()
+        }
         this.setvalue()
         this.stopAD()
         this.listenScroll()
