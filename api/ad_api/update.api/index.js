@@ -6,12 +6,30 @@
     removeADRoot.prototype.adBottomNode = ''
     removeADRoot.prototype.bottomOperateTop = ''
 
+    removeADRoot.prototype.invokeBtn = ''
+    removeADRoot.prototype.cancelBtn = ''
+
+
     removeADRoot.prototype.setvalue = function(){
         this.adNode = document.getElementsByClassName('afd-ad')
         this.adBottomNode = document.getElementsByClassName('banner')
         this.bottomOperateTop = document.getElementsByClassName('bottomOperateTop')
     }
 
+    removeADRoot.prototype.setBtnvalue = function(){
+        var modal = document.getElementsByClassName('control-wrap')[0]
+        if(!this.invokeBtn && document.getElementsByClassName('invoke-btn')[0]){
+            this.invokeBtn = document.getElementsByClassName('invoke-btn')[0]
+            return 'hasInvokeBtn'
+        }
+        if(!this.cancelBtn && modal){
+            if(modal.getElementsByTagName('button')[0]){
+                this.cancelBtn = modal.getElementsByTagName('button')[0]
+                return 'hasCancelBtn'
+            }
+        }
+    }
+    
     removeADRoot.prototype.maxLength = function(){
     
         var a = this.adNode.length
@@ -29,6 +47,19 @@
                 clearInterval(timer)
             }
         }, longTime);
+    }
+
+    // 如果出现需要点击按钮才可以查看小说,可以使用该函数
+    // 自动执行按钮函数
+    removeADRoot.prototype.autoRunBtnEvent = function() {
+        if(this.setBtnvalue() === 'hasInvokeBtn'){
+            this.invokeBtn.click()
+        }else if(this.setBtnvalue() === 'hasCancelBtn'){
+            this.cancelBtn.click()
+        }else{
+            alert('没获取到按钮的值')
+        }
+        
     }
     
     // 写入window.name,在页面重新加载的时候，自动引入脚本并且执行
@@ -69,10 +100,8 @@
         }
     }
 
-    removeADRoot.prototype.init = function() {
+    removeADRoot.prototype.listenScroll = function(){
         var self = this
-        this.setvalue()
-        this.stopAD()
         var originHeight =  document.body.clientHeight ||document.body.scrollHeight;
         // 监听页面高度变化
         window.addEventListener('scroll', function (e) {
@@ -82,6 +111,13 @@
                 self.witeAndReadWindowName()
             }
         })
+    }
+
+    removeADRoot.prototype.init = function() {
+        this.autoRunBtnEvent()
+        this.setvalue()
+        this.stopAD()
+        this.listenScroll()
     }
 
     var removeAD = new removeADRoot()
