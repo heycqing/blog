@@ -52,14 +52,15 @@
     // 如果出现需要点击按钮才可以查看小说,可以使用该函数
     // 自动执行按钮函数
     removeADRoot.prototype.autoRunBtnEvent = function() {
-        if(this.setBtnvalue() === 'hasInvokeBtn'){
-            this.invokeBtn.click()
-        }else if(this.setBtnvalue() === 'hasCancelBtn'){
-            this.cancelBtn.click()
-        }else{
-            alert('没获取到按钮的值')
+        while(this.invokeBtn && this.cancelBtn){
+            if(this.setBtnvalue() === 'hasInvokeBtn'){
+                this.invokeBtn.click()
+            }else if(this.setBtnvalue() === 'hasCancelBtn'){
+                this.cancelBtn.click()
+            }else{
+                alert('没获取到按钮的值')
+            }
         }
-        
     }
     
     // 写入window.name,在页面重新加载的时候，自动引入脚本并且执行
