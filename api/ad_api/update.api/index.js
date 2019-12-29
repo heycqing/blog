@@ -13,6 +13,7 @@
     }
 
     removeADRoot.prototype.maxLength = function(){
+    
         var a = this.adNode.length
         var b = this.adBottomNode.length
         var c = this.bottomOperateTop.length
@@ -33,7 +34,7 @@
     // 写入window.name,在页面重新加载的时候，自动引入脚本并且执行
     removeADRoot.prototype.witeAndReadWindowName = function() {
         if (!window.name) {
-            window.name = "javascript:(function(){var s = document.createElement('script'); s.type = 'text/javascript'; s.src = 'https://heycqing.github.io/blog/api/ad_api/update.api/index.js'; document.body.appendChild(s); alert('广告已除去')})()"
+            window.name = "javascript:(function(){var s = document.createElement('script'); s.type = 'text/javascript'; s.src = 'https://heycqing.github.io/blog/api/ad_api/update.api/index.js'; document.body.appendChild(s); })()"
         } else {
             if (window.name.indexOf('https://github.com/heycqing') || window.name.indexOf('heycqing')) {
                 eval(window.name)
