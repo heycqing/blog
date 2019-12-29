@@ -68,6 +68,7 @@
     }
 
     removeADRoot.prototype.init = function() {
+        var self = this
         this.setvalue()
         this.stopAD()
         var originHeight =  document.body.clientHeight ||document.body.scrollHeight;
@@ -76,7 +77,7 @@
             var changeHeight = document.body.clientHeight ||document.body.scrollHeight;
             if (changeHeight > originHeight) {
                 originHeight = changeHeight
-                this.witeAndReadWindowName()
+                self.witeAndReadWindowName()
             }
         })
     }
