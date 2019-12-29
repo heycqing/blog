@@ -1,21 +1,15 @@
 (function () {
-
     function removeADRoot(){}
-
     removeADRoot.prototype.adNode = ''
     removeADRoot.prototype.adBottomNode = ''
     removeADRoot.prototype.bottomOperateTop = ''
-
     removeADRoot.prototype.invokeBtn = ''
     removeADRoot.prototype.cancelBtn = ''
-
-
     removeADRoot.prototype.setvalue = function(){
         this.adNode = document.getElementsByClassName('afd-ad')
         this.adBottomNode = document.getElementsByClassName('banner')
         this.bottomOperateTop = document.getElementsByClassName('bottomOperateTop')
     }
-
     removeADRoot.prototype.setBtnvalue = function(){
         if(!this.invokeBtn && document.getElementsByClassName('invoke-btn')[0]){
             this.invokeBtn = document.getElementsByClassName('invoke-btn')[0]
@@ -23,7 +17,6 @@
             return 'done'
         }
     }
-
     removeADRoot.prototype.setCancelBtnvalue = function(){
         var modal = document.getElementsByClassName('control-wrap')[0]
         if(!this.cancelBtn && modal){
@@ -33,8 +26,6 @@
             }
         }
     }
-
-    
     removeADRoot.prototype.maxLength = function(){
     
         var a = this.adNode.length
@@ -42,7 +33,6 @@
         var c = this.bottomOperateTop.length
         return  a > b ? (a > c ? a : c) : (b > c ?  b : c)
     }
-
     removeADRoot.prototype.loopFn = function(times, longTime) {
         return new Promise((resolve, reject) =>{
             let self = this
@@ -59,7 +49,6 @@
         })
         
     }
-
     // 如果出现需要点击按钮才可以查看小说,可以使用该函数
     // 自动执行按钮函数
     removeADRoot.prototype.autoRunBtnEvent = function() {
@@ -67,7 +56,6 @@
             this.invokeBtn.click()
             this.loopFn(6,900).then(data => {console.log('ok')})
     }
-    
     // 写入window.name,在页面重新加载的时候，自动引入脚本并且执行
     removeADRoot.prototype.witeAndReadWindowName = function() {
         var windowName =  window.name.trim('')
@@ -80,8 +68,6 @@
         }
 
     }
-
-
     removeADRoot.prototype.stopAD = function(key) {
         // 针对 手机百度小说的广告
         let maxLength = this.maxLength()
@@ -105,7 +91,6 @@
             }
         }
     }
-
     removeADRoot.prototype.listenScroll = function(){
         var self = this
         var originHeight =  document.body.clientHeight ||document.body.scrollHeight;
@@ -118,7 +103,6 @@
             }
         })
     }
-
     removeADRoot.prototype.init = function() {
         if(this.setBtnvalue() !== 'done'){
             this.autoRunBtnEvent()
@@ -127,7 +111,6 @@
         this.stopAD()
         this.listenScroll()
     }
-
     var removeAD = new removeADRoot()
     removeAD.init()
 })()
