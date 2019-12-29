@@ -13,9 +13,9 @@
     }
 
     removeADRoot.prototype.maxLength = function(){
-        var a = this.adNode
-        var b = this.adBottomNode
-        var c = this.bottomOperateTop
+        var a = this.adNode.length
+        var b = this.adBottomNode.length
+        var c = this.bottomOperateTop.length
         return  a > b ? (a > c ? a : c) : (b > c ?  b : c)
     }
 
