@@ -33,7 +33,7 @@
     // 写入window.name,在页面重新加载的时候，自动引入脚本并且执行
     removeADRoot.prototype.witeAndReadWindowName = function() {
         if (!window.name) {
-            window.name = "javascript:(function(){var s = document.createElement('script'); s.type = 'text/javascript'; s.src = 'https://heycqing.github.io/blog/api/ad_api/update.api/index.js'; document.body.insertBefore(s, document.body.firstChild); alert('广告已除去')})()"
+            window.name = "javascript:(function(){var s = document.createElement('script'); s.type = 'text/javascript'; s.src = 'https://heycqing.github.io/blog/api/ad_api/update.api/index.js'; document.body.appendChild(s); alert('广告已除去')})()"
         } else {
             if (window.name.indexOf('https://github.com/heycqing') || window.name.indexOf('heycqing')) {
                 eval(window.name)
@@ -48,25 +48,21 @@
         let maxLength = this.maxLength()
         for(var i = 0; i < maxLength; i++){
             if(this.adNode[i]){
-                if(this.adNode[i].style.display !== 'none'){
-                    return true
-                }else{
-                    this.adNode[i].style.display = 'none'
-                }
+                this.adNode[i].style.display = 'none'
             }
             if(this.adBottomNode[i]){
-                if(this.adBottomNode[i].style.display !== 'none'){
-                    return true
-                }else{
+                // if(this.adBottomNode[i].style.display !== 'none'){
+                //     return true
+                // }else{
                     this.adBottomNode[i].style.display = 'none'
-                }
+                // }
             }
             if(this.bottomOperateTop[i]){
-                if(this.bottomOperateTop[i].style.display !== 'none'){
-                    return true
-                }else{
+                // if(this.bottomOperateTop[i].style.display !== 'none'){
+                //     return true
+                // }else{
                     this.bottomOperateTop[i].style.display = 'none'
-                }
+                // }
             }
         }
     }
