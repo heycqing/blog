@@ -29,6 +29,17 @@
             }
         }
     }
+
+    removeADRoot.prototype.setCancelBtnvalue = function(){
+        var modal = document.getElementsByClassName('control-wrap')[0]
+        if(!this.cancelBtn && modal){
+            if(modal.getElementsByTagName('button')[0]){
+                this.cancelBtn = modal.getElementsByTagName('button')[0]
+                return true
+            }
+        }
+    }
+
     
     removeADRoot.prototype.maxLength = function(){
     
@@ -39,35 +50,35 @@
     }
 
     removeADRoot.prototype.loopFn = function(times, longTime) {
-        var timer = setInterval(() => {
-            // work
-            this.stopAD()
-            times--
-            if( !this.stopAD() || times === 0){
-                clearInterval(timer)
-            }
-        }, longTime);
+        return new Promise((resolve, reject) =>{
+            let self = this
+            var timer = setInterval(() => {
+                // work
+                self.setCancelBtnvalue()
+                times--
+                if( self.setCancelBtnvalue() || times === 0){
+                    self.cancelBtn.click()
+                    resolve('ok')
+                    clearInterval(timer)
+                }
+            }, longTime);
+        })
+        
     }
 
     // 如果出现需要点击按钮才可以查看小说,可以使用该函数
     // 自动执行按钮函数
     removeADRoot.prototype.autoRunBtnEvent = function() {
-        while(!this.invokeBtn && !this.cancelBtn){
-            if(this.setBtnvalue() === 'hasInvokeBtn'){
-                this.invokeBtn.click()
-            }else if(this.setBtnvalue() === 'hasCancelBtn'){
-                this.cancelBtn.click()
-            }else{
-                alert('没获取到按钮的值')
-            }
-        }
+            this.setBtnvalue()
+            this.invokeBtn.click()
+            this.loopFn(3,1000).then(data => {console.log('ok')})
     }
     
     // 写入window.name,在页面重新加载的时候，自动引入脚本并且执行
     removeADRoot.prototype.witeAndReadWindowName = function() {
         var windowName =  window.name.trim('')
         if (!windowName) {
-            window.name = "javascript:(function(){var s = document.createElement('script'); s.type = 'text/javascript'; s.src = 'https://heycqing.github.io/blog/api/ad_api/update.api/index.js'; document.body.appendChild(s); })()"
+            window.name = "javascript:(function(){var s = document.createElement('script'); s.type = 'text/javascript'; var randomNumber=JSON.stringify( Math.random() * 10000).split('.')[0]; s.src = 'https://heycqing.github.io/blog/api/ad_api/update.api/index.js?'+randomNumber; document.body.appendChild(s); alert('heycqing出品去除广告')})()"
         } else {
             if (window.name.indexOf('https://github.com/heycqing') || window.name.indexOf('heycqing')) {
                 eval(window.name)

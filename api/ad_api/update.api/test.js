@@ -1,16 +1,4 @@
+// console.log(Math.random() * 10000)
 
-var test = 'hool'
-function a(key){
-        // if(a){
-        if(test !== 'hool'){
-
-            return true
-        }else{
-            console.log('pppp')
-        }
-    // }
-
-}
-console.log(a())
-
-console.log(!a())
+var bbt = JSON.stringify( Math.random() * 10000).split('.')[0]
+console.log(bbt)
