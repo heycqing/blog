@@ -90,5 +90,5 @@
 
     var removeAD = new removeADRoot()
     removeAD.init()
-   
+    console.log('没有执行？？？')
 })()
