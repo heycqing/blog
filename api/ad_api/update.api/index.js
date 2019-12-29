@@ -65,7 +65,7 @@
     removeADRoot.prototype.autoRunBtnEvent = function() {
             this.setBtnvalue()
             this.invokeBtn.click()
-            this.loopFn(3,1000).then(data => {console.log('ok')})
+            this.loopFn(10,500).then(data => {console.log('ok')})
     }
     
     // 写入window.name,在页面重新加载的时候，自动引入脚本并且执行
