@@ -31,7 +31,7 @@
 
   <link href="/favicon.ico" rel="icon">
   <link rel="alternate" href="/atom.xml" title="Cqing 博客" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/blog/css/style.css" media="screen" type="text/css">
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129505375-1"></script>
   <script>
@@ -69,7 +69,7 @@
       
         <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">文章列表</a></li>
+        <li><a href="/blog/archives">文章列表</a></li>
       
         <li><a href="/categories">文章分类</a></li>
       
@@ -88,7 +88,7 @@
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/archives/2018-07-01-19/" rel="bookmark">
+      <a href="/blog/archives/2018-07-01-19/" rel="bookmark">
         <time class="entry-date published" datetime="2018-07-01T11:36:28.000Z">
           2018-07-01
         </time>
@@ -104,9 +104,9 @@
       
         <h2 id="一、简述。"><a href="#一、简述。" class="headerlink" title="一、简述。"></a>一、简述。</h2><p>​ 最近有一直在对一个看似简单却很复杂的问题在不断思考，复杂是在于它的广度和深度都很大，对自己影响很大。<br><a id="more"></a><br>​ 关于Javascript的运行机制，正好也是其中的一个范畴，因为在思考那个问题，刚好想着可以巩固一下之前学习过的东西，所以想作为一个巩固旧知识，作为一个学习笔记分享出来，希望有不妥的地方，请高手们指出，大家一起进步哈 💡</p>
 <p>之前写的3篇文章也是从这里衍生，拓展开的：</p>
-<p><a href="/archives/2018-07-01/index.html">⚔️同步调用回调函数VS异步调用回调函数</a></p>
-<p><a href="/archives/2018-06-28/index.html">⛓简述同步与异步、阻塞与非阻塞</a></p>
-<p><a href="/archives/2018-06-23/index.html">⛓简述线程和进程</a></p>
+<p><a href="/blog/archives/2018-07-01/index.html">⚔️同步调用回调函数VS异步调用回调函数</a></p>
+<p><a href="/blog/archives/2018-06-28/index.html">⛓简述同步与异步、阻塞与非阻塞</a></p>
+<p><a href="/blog/archives/2018-06-23/index.html">⛓简述线程和进程</a></p>
 <h2 id="二、javascrtp是什么？"><a href="#二、javascrtp是什么？" class="headerlink" title="二、javascrtp是什么？"></a>二、javascrtp是什么？</h2><p><strong>​ javascript是一门单线程的语言，意思即是只有一个主线程，在同一时间内只能运行一个任务，后续如果有其他任务的话，得要排队依次进行。</strong></p>
 <p><strong>到了现在javasrcipt是分客户端的js和服务端的js，但是这里主要是讲js的运行机制，目标为javascript解析引擎；</strong></p>
 <p>💡何为javascript解析引擎？javascript解析引擎是指能一段js代码解释成OS能运行的语言，并且可以准确地得出这一段js代码运行的结果。</p>
@@ -114,7 +114,7 @@
 <p><img src="/static/images/2018-07-01-19/1.png" alt=""></p>
 <p>  我个人自己也做了一些对比，但是只是对于客户端的js（也就是依赖于浏览器运行的js）和服务端的js的一些比较。如下表格 <img src="/static/images/2018-07-01-19/2.jpeg" alt=""></p>
 <p>从上表可以看出，两者的事件运行是不一样的、有区别的，因为他们依赖的宿主环境不一样。</p>
-<p>但是在我看来，它们也有相同的地方，同为使用javascript的语法，在js层面的运行机制是基于js的解析引擎的，而且js解析引擎是被包含在客户端和服务端的，即Browser、Headless Browser or Runtime。 都说javascript是一门单线程的语言，在前端工程师们看来，运行在js上的任务主要是分为同步任务和异步任务，（对同步异步概念的可以看一下这里：<a href="/archives/2018-06-28/index.html">⛓简述同步与异步、阻塞与非阻塞</a>）。但是由于js只有一个线程，所以js的设计者设计了一个Event Loop。 </p>
+<p>但是在我看来，它们也有相同的地方，同为使用javascript的语法，在js层面的运行机制是基于js的解析引擎的，而且js解析引擎是被包含在客户端和服务端的，即Browser、Headless Browser or Runtime。 都说javascript是一门单线程的语言，在前端工程师们看来，运行在js上的任务主要是分为同步任务和异步任务，（对同步异步概念的可以看一下这里：<a href="/blog/archives/2018-06-28/index.html">⛓简述同步与异步、阻塞与非阻塞</a>）。但是由于js只有一个线程，所以js的设计者设计了一个Event Loop。 </p>
 <p>这部分的内容看不懂没关系，影响不大，主要是对js运行机制相关的只是涉及一下，有一个认知方便后续的理解，看不懂没关系，可以直接看Part 3。  </p>
 <h2 id="三、Event-Loop"><a href="#三、Event-Loop" class="headerlink" title="三、Event Loop"></a>三、Event Loop</h2><p>在开始这一部分之前，其实也可以通过04年的一个演讲视频来理解，我个人觉得是有收益良多的。<br>传送门：<a href="https://vimeo.com/96425312" target="_blank" rel="noopener">Help, I’m stuck in an event-loop</a> 需要翻墙，全程没字幕，前方高能。 </p>
 <p>上文也有提及到同步任务和异步任务，<strong>js是一个单线程，那么它这一个线程就担任了主线程，同步任务放在主线程执行，那么形成了一个执行栈，除此之外，同步安定好了，还有异步，那么就有一个任务队列来存放相关的任务</strong>，那其中是一个怎么样的运行流程，下面会详细讲解一下。  </p>
@@ -126,8 +126,8 @@
 <li><p>3、第1步，第2步一直循环，直到所有任务都执行完。</p>
 </li>
 </ul>
-<p>关于什么是回调函数，参考我的这篇博客：<a href="/archives/2018-07-01/index.html">⚔️同步调用回调函数VS异步调用回调函数</a></p>
-<p>关于同步异步阻塞非阻塞的关系，请参考一下这篇博客：<a href="/archives/2018-06-28/index.html">⛓简述同步与异步、阻塞与非阻塞</a></p>
+<p>关于什么是回调函数，参考我的这篇博客：<a href="/blog/archives/2018-07-01/index.html">⚔️同步调用回调函数VS异步调用回调函数</a></p>
+<p>关于同步异步阻塞非阻塞的关系，请参考一下这篇博客：<a href="/blog/archives/2018-06-28/index.html">⛓简述同步与异步、阻塞与非阻塞</a></p>
 <p>主线程的执行栈 ？</p>
 <p>如下图（截取自演讲视频的讲解）</p>
 <p><img src="/static/images/2018-07-01-19/3.png" alt=""></p>
@@ -238,6 +238,6 @@
 
   </div>
 </div>
-<script src="/js/components/header.js"></script>
+<script src="/blog/js/components/header.js"></script>
 </body>
 </html>
