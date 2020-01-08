@@ -103,20 +103,20 @@
     <div class="entry">
       
         <h2 id="简述："><a href="#简述：" class="headerlink" title="简述："></a>简述：</h2><p>很多场景中，都需要我们需要去通过js去判断DOM元素，按照自己实际的需要去改变DOM的css属性。<a id="more"></a> 例如，弹窗的显示和隐藏、背景图片的更换、导航icon的高亮等等….. 今天就来简单讨论关于 「关于通过js去判断dom元素去改变该元素的css属性来」  </p>
-<h3 id="简单操作过程："><a href="#简单操作过程：" class="headerlink" title="简单操作过程："></a>简单操作过程：</h3><h4 id="1-关于style内联css"><a href="#1-关于style内联css" class="headerlink" title="1.关于style内联css;"></a>1.关于style内联css;</h4><p>给出一个实际的demo，「一个元素的显示和消失」 一般来说，我们都是通过js去获取dom的元素，进而去判断它的display是否为none或者block；<br>于是有了下面的示范；<br><img src="/static/images/2018-05-28/1.jpeg" alt="">   </p>
-<p>这里示范第一步：<br>首先通过document去获取相关的想要改变的节点元素，这时候如果需要进行下一部的操作，应该要去检验一下获取到的style是否存在；<br>ok! <strong>我这里log了H1的style</strong> ：<br><img src="/static/images/2018-05-28/2.jpeg" alt=""> </p>
-<p>通过👆的console可以看到H1的整个style信息，但是…..what，我在style明明添加了color:red，页面页渲染出来红色，但是为什么H1的style对象里面的color值为空！？<br>很明显，这样是无法进行下一步的，因为获取的值是空.<br>em….再来看一下下面的一个demo，再下定论： 下面换一种方式来设置css属性，既然style标签不行，那就来一份内联style:<br><img src="/static/images/2018-05-28/3.jpeg" alt="">  </p>
-<p>ok，我们设置好了h1的内联属性，接下来看一下页面：<br><img src="/static/images/2018-05-28/4.jpeg" alt="">  </p>
+<h3 id="简单操作过程："><a href="#简单操作过程：" class="headerlink" title="简单操作过程："></a>简单操作过程：</h3><h4 id="1-关于style内联css"><a href="#1-关于style内联css" class="headerlink" title="1.关于style内联css;"></a>1.关于style内联css;</h4><p>给出一个实际的demo，「一个元素的显示和消失」 一般来说，我们都是通过js去获取dom的元素，进而去判断它的display是否为none或者block；<br>于是有了下面的示范；<br><img src="/blog/static/images/2018-05-28/1.jpeg" alt="">   </p>
+<p>这里示范第一步：<br>首先通过document去获取相关的想要改变的节点元素，这时候如果需要进行下一部的操作，应该要去检验一下获取到的style是否存在；<br>ok! <strong>我这里log了H1的style</strong> ：<br><img src="/blog/static/images/2018-05-28/2.jpeg" alt=""> </p>
+<p>通过👆的console可以看到H1的整个style信息，但是…..what，我在style明明添加了color:red，页面页渲染出来红色，但是为什么H1的style对象里面的color值为空！？<br>很明显，这样是无法进行下一步的，因为获取的值是空.<br>em….再来看一下下面的一个demo，再下定论： 下面换一种方式来设置css属性，既然style标签不行，那就来一份内联style:<br><img src="/blog/static/images/2018-05-28/3.jpeg" alt="">  </p>
+<p>ok，我们设置好了h1的内联属性，接下来看一下页面：<br><img src="/blog/static/images/2018-05-28/4.jpeg" alt="">  </p>
 <p>哇，终于看到了想要H1的style对象中color值为 red ，OK，这样就可以继续下一步，来达到自己的目的了。<br>同时，我们可以对比不难得出，element.style只作用于内联的css。 </p>
 <p>  ok，我们可以看一下MDN的web API的解释：</p>
 <p><code>HTMLElement.style</code> 属性返回一个 <a href="https://developer.mozilla.org/zh-US/docs/DOM/CSSStyleDeclaration" title="DOM/CSSStyleDeclaration" target="_blank" rel="noopener"><code>CSSStyleDeclaration</code></a> 对象，表示元素的 内联<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes#style" target="_blank" rel="noopener"><code>style</code> 属性（attribute）</a>，但忽略任何样式表应用的属性。</p>
 <p>可以看出来我们的结论和web API的解释是一样的。   </p>
 <h4 id="2-ok，关于样式表的css"><a href="#2-ok，关于样式表的css" class="headerlink" title="2.ok，关于样式表的css;"></a>2.ok，关于样式表的css;</h4><p>其实，做到这一步，通过内联的css就可以达到预期的效果，但是我们这里做一下拓展，我们并不满足于只是内联的css，这样太麻烦了，而且很多时候会造成代码的紊乱和复杂，</p>
-<p><strong>我们先想通过css样式表去获取：</strong> 说干就干，OK，上代码：<br> <img src="/static/images/2018-05-28/5.jpeg" alt=""> </p>
-<p> em….在上图好吧，更有说服力：<br> <img src="/static/images/2018-05-28/6.jpeg" alt=""><br>  在这里可以看到，控制台有输出 rgb（255，0，0）,这里一看就是红色的rgb值了，说明没问题。 这里有一个秘诀就是通过：</p>
+<p><strong>我们先想通过css样式表去获取：</strong> 说干就干，OK，上代码：<br> <img src="/blog/static/images/2018-05-28/5.jpeg" alt=""> </p>
+<p> em….在上图好吧，更有说服力：<br> <img src="/blog/static/images/2018-05-28/6.jpeg" alt=""><br>  在这里可以看到，控制台有输出 rgb（255，0，0）,这里一看就是红色的rgb值了，说明没问题。 这里有一个秘诀就是通过：</p>
 <p><code>window.getComputedStyle(element,伪元素)</code></p>
 <p>来完成对样式表的获取。   </p>
-<p>说到这里差不多结束：<br>上个gif:<br><img src="/static/images/2018-05-28/7.gif" alt=""></p>
+<p>说到这里差不多结束：<br>上个gif:<br><img src="/blog/static/images/2018-05-28/7.gif" alt=""></p>
 <p>实际上来到这里，可以通过自己的demo来对比得出结论，再到权威性的网站去验证自己想法。<br>最重要的是在这个基础上，做一些自己的想法上拓展，我自己在玩这个demo的时候，也是这样的一个思维过程，<br>最后通过标准性的网站去获取自己的答案。</p>
 
       

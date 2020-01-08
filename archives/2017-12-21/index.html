@@ -102,7 +102,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <p><img src="/static/images/2017-12-21/title.png" alt=""> </p>
+        <p><img src="/blog/static/images/2017-12-21/title.png" alt=""> </p>
 <p>为了一个小公司的一个录入系统，我在使用<code>angular.js</code>时，发现$http无法使用，但由于急需，暂时没有想到解决办法，就急匆匆使用了<code>setinverter</code>这个函数来获取数据库中的数据，遍历出来；<br><a id="more"></a><br>因为是早期版本的<code>angular.js(1.5.7)</code>, 使用的http也是<code>angular.js</code>里自带的模块，因为太久没看<code>angular</code>，后来上网查资料才知道，原来，<code>angular.js</code>在1.6 版本后，http的成功和失败的回调方法已经改为了 <code>then()</code>;</p>
 <p>结果是可行的，但是出现一种情况就是，能查到3张表，但是我需要同时查讯4张表，但是最后一张表的数据没有显示出来，我在远程数据库中debug的时候，看到数据库显示 t<code>oo mach connect</code>；</p>
 <p><code>too mach connect</code> 的问题就是表现为你在远程数据库上无法进入数据库，你无法通过正常的键入用户名和密码进入数据库来对数据库进行操作。</p>
@@ -113,16 +113,16 @@
 <ol>
 <li>如果你的数据库在一直都是数据输进，不断地接受请求，不断响应用户交互的，这种情况下，无法直接停掉数据库来只修改配置，可以通过数据命令行来不安全修改；</li>
 <li><p>如果你的产品还是上线，或者还没被用户使用，这种情况就是这直接修改数据库的配置文件来修改最大连接数；</p>
-<p>首先，可以查看一下自己数据库的默认配置；<br>进如mysql 里使用命令：<br><code>mysql&gt; show variables like &#39;%max_connections%&#39;;</code><br><img src="/static/images/2017-12-21/1.png" alt=""> </p>
+<p>首先，可以查看一下自己数据库的默认配置；<br>进如mysql 里使用命令：<br><code>mysql&gt; show variables like &#39;%max_connections%&#39;;</code><br><img src="/blog/static/images/2017-12-21/1.png" alt=""> </p>
 </li>
 </ol>
 <p>这是我修改后的最大连接数，原先我的默认连接数是151的；<br>然后可以在<code>etc/init.d/my.cnf</code>  或者<code>etc/mysql/my.cnf</code>; </p>
-<p>找到 max_connections = xxxx;<br><img src="/static/images/2017-12-21/2.png" alt=""> 直接修改就行；  </p>
+<p>找到 max_connections = xxxx;<br><img src="/blog/static/images/2017-12-21/2.png" alt=""> 直接修改就行；  </p>
 <h2 id="另一种方式则是："><a href="#另一种方式则是：" class="headerlink" title="另一种方式则是："></a>另一种方式则是：</h2><p>mysql命令行修改。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql -uuser -ppassword                        (命令行登录MySQL) </span><br><span class="line">mysql&gt;show variables like <span class="string">'max\_connections'</span>;  (查可以看当前的最大连接数) </span><br><span class="line">msyql&gt;set global max\_connections=<span class="number">1000</span>;        (设置最大连接数为<span class="number">1000</span>，可以再次查看是否设置成功) </span><br><span class="line">mysql&gt;exit;                                    (推出)</span><br></pre></td></tr></table></figure></p>
 <h3 id="拓展："><a href="#拓展：" class="headerlink" title="拓展："></a>拓展：</h3><ol>
 <li>查看当前连接数（最高并发数）；</li>
 </ol>
-<p><code>mysql&gt; show status like &#39;Threads%&#39;;</code><br> <img src="/static/images/2017-12-21/3.png" alt="">       </p>
+<p><code>mysql&gt; show status like &#39;Threads%&#39;;</code><br> <img src="/blog/static/images/2017-12-21/3.png" alt="">       </p>
 <p><code>Threads_connected</code> 表示当前连接时；</p>
 <p><code>Threads_running</code> 表示并发数；</p>
 <p>参照资料：</p>

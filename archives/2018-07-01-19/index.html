@@ -111,8 +111,8 @@
 <p><strong>到了现在javasrcipt是分客户端的js和服务端的js，但是这里主要是讲js的运行机制，目标为javascript解析引擎；</strong></p>
 <p>💡何为javascript解析引擎？javascript解析引擎是指能一段js代码解释成OS能运行的语言，并且可以准确地得出这一段js代码运行的结果。</p>
 <p>js解析引擎一般出现在浏览器中，现在也可以运行在服务端的V8上，这里没有深入去探究其内核是什么，只是单纯的探究一下它的运行机制，它是包含在客服端js和服务端js里的。 下面是摘自网上的一张关于js解析引擎和其执行的内核或者平台的对照表。</p>
-<p><img src="/static/images/2018-07-01-19/1.png" alt=""></p>
-<p>  我个人自己也做了一些对比，但是只是对于客户端的js（也就是依赖于浏览器运行的js）和服务端的js的一些比较。如下表格 <img src="/static/images/2018-07-01-19/2.jpeg" alt=""></p>
+<p><img src="/blog/static/images/2018-07-01-19/1.png" alt=""></p>
+<p>  我个人自己也做了一些对比，但是只是对于客户端的js（也就是依赖于浏览器运行的js）和服务端的js的一些比较。如下表格 <img src="/blog/static/images/2018-07-01-19/2.jpeg" alt=""></p>
 <p>从上表可以看出，两者的事件运行是不一样的、有区别的，因为他们依赖的宿主环境不一样。</p>
 <p>但是在我看来，它们也有相同的地方，同为使用javascript的语法，在js层面的运行机制是基于js的解析引擎的，而且js解析引擎是被包含在客户端和服务端的，即Browser、Headless Browser or Runtime。 都说javascript是一门单线程的语言，在前端工程师们看来，运行在js上的任务主要是分为同步任务和异步任务，（对同步异步概念的可以看一下这里：<a href="/blog/archives/2018-06-28/index.html">⛓简述同步与异步、阻塞与非阻塞</a>）。但是由于js只有一个线程，所以js的设计者设计了一个Event Loop。 </p>
 <p>这部分的内容看不懂没关系，影响不大，主要是对js运行机制相关的只是涉及一下，有一个认知方便后续的理解，看不懂没关系，可以直接看Part 3。  </p>
@@ -130,14 +130,14 @@
 <p>关于同步异步阻塞非阻塞的关系，请参考一下这篇博客：<a href="/blog/archives/2018-06-28/index.html">⛓简述同步与异步、阻塞与非阻塞</a></p>
 <p>主线程的执行栈 ？</p>
 <p>如下图（截取自演讲视频的讲解）</p>
-<p><img src="/static/images/2018-07-01-19/3.png" alt=""></p>
+<p><img src="/blog/static/images/2018-07-01-19/3.png" alt=""></p>
 <h4 id="执行栈，先入后出。"><a href="#执行栈，先入后出。" class="headerlink" title="执行栈，先入后出。"></a>执行栈，先入后出。</h4><p>第一个进入的是要执行的函数，（途中就是printSquare函数），然后就是依次调用的函数入栈，运行完就依次出栈，直到执行栈为空。</p>
 <h3 id="完整的Event-Loop"><a href="#完整的Event-Loop" class="headerlink" title="完整的Event Loop"></a>完整的Event Loop</h3><p>如下图，(截取自演讲视频的讲解）</p>
-<p><img src="/static/images/2018-07-01-19/4.png" alt=""></p>
+<p><img src="/blog/static/images/2018-07-01-19/4.png" alt=""></p>
 <p>结合我刚才所说的，再去看图，便会很好地理解。 好吧接下来来一个例子来证明一下是不是真的懂了js的运行机制。如下图。</p>
-<p><img src="/static/images/2018-07-01-19/5.png" alt=""></p>
+<p><img src="/blog/static/images/2018-07-01-19/5.png" alt=""></p>
 <p>先不要看答案，自己可以猜想一下。   答案如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span> <span class="number">1</span></span><br><span class="line">promise</span><br><span class="line"><span class="built_in">console</span> <span class="number">2</span></span><br><span class="line">then</span><br><span class="line">setTimeout</span><br></pre></td></tr></table></figure></p>
-<p><img src="/static/images/2018-07-01-19/6.png" alt=""></p>
+<p><img src="/blog/static/images/2018-07-01-19/6.png" alt=""></p>
 <p>这样我归类出异步任务就可以轻而易举地判断了 于是我开始做了一笔记，把一些常用的异步操作分类；</p>
 <blockquote>
 <p>客户端js:<br>1、ajax一类的请求事件；<br>2、定时器：setTimeout 和 setInterval;</p>
@@ -158,7 +158,7 @@
 <p>虽然说是又在细分开来了宏任务和微任务，但是它们还是依然存在事件循环中，是被包裹在Event loop中。</p>
 <p>这里所说的宏任务和微任务是指，在进行新的宏任务之前，要先检查是否有存在可执行的微任务，如果有就执行所有微任务，再去执行新的宏任务，如果没有就直接执行宏任务。</p>
 <p>一开始我也是不相信的，但是把这个带进去的刚才的例子的话，是行的通的。</p>
-<p><img src="/static/images/2018-07-01-19/7.png" alt=""></p>
+<p><img src="/blog/static/images/2018-07-01-19/7.png" alt=""></p>
 <p>  我用自己的话梳理一下过程</p>
 <ul>
 <li>1、整段代码作为一个宏任务执行，遇到console 1 就执行； </li>

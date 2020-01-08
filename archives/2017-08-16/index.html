@@ -102,14 +102,14 @@
   <div class="article-content">
     <div class="entry">
       
-        <p><img src="/static/images/2017-08-16/title.jpg" alt=""></p>
+        <p><img src="/blog/static/images/2017-08-16/title.jpg" alt=""></p>
 <a id="more"></a>
 <p>前端构建工具—gulp.js gulp.js和grunt.js都是前端工程流中的一种前端构建工具，其核心功能都是自动化对代码，图片进行压缩，校验，之后再以页面为单位进行简单的资源整合，以用来提高效率。 说到底，就是一种用来解放双手，自动化地代替人们做重复的工作的自动化工具。 本人是学习了用gulp.js这种工具，与<a href="http://gruntjs.com/" target="_blank" rel="noopener">gruntjs</a>相比，gulpjs无需写一大堆繁杂的配置参数，API也非常简单，学习起来很容易，而且gulpjs使用的是nodejs中<a href="http://nodejs.org/api/stream.html" target="_blank" rel="noopener">stream</a>来读取和操作数据，其速度更快。 在使用之前，请确认已经安装了node.js。  </p>
 <h1 id="安装gulp"><a href="#安装gulp" class="headerlink" title="安装gulp"></a>安装gulp</h1><p>下面是官网给出的安装流程，和执行流程。</p>
-<p><img src="/static/images/2017-08-16/1.png" alt="">  </p>
+<p><img src="/blog/static/images/2017-08-16/1.png" alt="">  </p>
 <p><strong>安装完成后，直接运行 gulp &lt;任务名字&gt;</strong> <strong>如下图是我自己的gulp.js 和运行情况</strong> </p>
-<p><img src="/static/images/2017-08-16/2.png" alt="">  </p>
-<h3 id="没标明具体任务名字，gulp会运行默认的任务。"><a href="#没标明具体任务名字，gulp会运行默认的任务。" class="headerlink" title="没标明具体任务名字，gulp会运行默认的任务。"></a><strong>没标明具体任务名字，gulp会运行默认的任务。</strong></h3><p><img src="/static/images/2017-08-16/3.png" alt=""></p>
+<p><img src="/blog/static/images/2017-08-16/2.png" alt="">  </p>
+<h3 id="没标明具体任务名字，gulp会运行默认的任务。"><a href="#没标明具体任务名字，gulp会运行默认的任务。" class="headerlink" title="没标明具体任务名字，gulp会运行默认的任务。"></a><strong>没标明具体任务名字，gulp会运行默认的任务。</strong></h3><p><img src="/blog/static/images/2017-08-16/3.png" alt=""></p>
 <h1 id="gulp插件"><a href="#gulp插件" class="headerlink" title="gulp插件"></a>gulp插件</h1><p>下面我就只说一些关于js,css,html和图片的压缩</p>
 <h3 id="js文件压缩："><a href="#js文件压缩：" class="headerlink" title="js文件压缩："></a>js文件压缩：</h3><p>使用<a href="https://www.npmjs.com/packages/gulp-uglify" target="_blank" rel="noopener">gulp-uglify</a> 安装：<code>npm install --save-dev gulp-uglify</code> 用来压缩js文件，使用的是uglify引擎</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>),</span><br><span class="line">    uglify = <span class="built_in">require</span>(<span class="string">"gulp-uglify"</span>);</span><br><span class="line"> </span><br><span class="line">gulp.task(<span class="string">'minify-js'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    gulp.src(<span class="string">'js/*.js'</span>) <span class="comment">// 要压缩的js文件</span></span><br><span class="line">    .pipe(uglify())  <span class="comment">//使用uglify进行压缩,更多配置请参考：</span></span><br><span class="line">    .pipe(gulp.dest(<span class="string">'dist/js'</span>)); <span class="comment">//压缩后的路径</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>

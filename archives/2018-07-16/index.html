@@ -104,7 +104,7 @@
       
         <p>​关于className 和 classList ，原生的DOM API，当我们需要使用为了一个元素添加一个css类或者去除一个css类，就会用上它们，当然使用jq的，当我没说过….，虽然jq很强大，但是个人觉得开始学习的时候，直接上手jq是对以后的学习是很不友好的，<a id="more"></a>除非你真的看过jq的源码。</p>
 <p>​当然并不是说jq不好，个人觉得，相反在业务处理上还是一款神器。只是对于个人学习不友好，你不知道底层的DOM是什么样的，就去上手jq框架，但是框架迭代太快，很快会老去，但是基层知识永远会是潮流。  </p>
-<p>​<img src="/static/images/2018-07-16/1.jpeg" alt=""></p>
+<p>​<img src="/blog/static/images/2018-07-16/1.jpeg" alt=""></p>
 <p>​所以，在学习的时候，我更偏向于学习原生操作，毕竟前端娱乐圈发展太快，众口纷说，<strong>但是所有高层建筑都是基于底层结构。</strong></p>
 <p>​</p>
 <h2 id="两者的概念"><a href="#两者的概念" class="headerlink" title="两者的概念"></a>两者的概念</h2><h3 id="classList是什么？"><a href="#classList是什么？" class="headerlink" title="classList是什么？"></a>classList是什么？</h3><p>​  它隶属于HTML5中新增的DOM API之一。 ​ 它是元素的一个只读属性，返回一个元素的类属性的实时 <code>DOMTokenList</code>集合。 ​ 但是可以使用add()，remove() 方法来添加类和删除类。 ​ 此外还有其他内置的方法：</p>
@@ -120,7 +120,7 @@
 <p>它是用来获取当前元素和修改当前元素的类列表。<br>使用方法很简单，直接使用：<code>Element.className=&#39;&lt;类名&gt;&#39;</code>。</p>
 <p>​</p>
 <h3 id="它们的作用是什么？"><a href="#它们的作用是什么？" class="headerlink" title="它们的作用是什么？"></a>它们的作用是什么？</h3><p>​ 它们都是用来对当前元素的类进行修改，包括添加和删除。 ​ classList是对于DOM 2的一个扩展，让修改类名更加方便；相对于className，当元素的类名越来越多的时候，使用className是不大方便的，因此classlist作为方便的使用方案。 ​ ​ 由于classList和className是类似的功能，当当前浏览器不支持的classList时，可以自行使用className配合正则表达式来封装成classList里面的方法。可以对比一下className和classList中的参数使用方法，className相对于classList在设置类名的是 使用类与类之间用空格间隔的 ，即 <code>&quot;&lt;类1&gt; 空格 &lt;类2&gt;&quot;</code> ，而classList的参数设置添加类名则是： <code>&quot;&lt;类1&gt;&quot;,&quot;&lt;类2&gt;&quot;</code>。    </p>
-<h2 id="两者的兼容性"><a href="#两者的兼容性" class="headerlink" title="两者的兼容性"></a>两者的兼容性</h2><p>​ classList的兼容大部分的浏览器，但是对于IE9以下（包括IE9）是不支持的。<br><img src="/static/images/2018-07-16/2.png" alt=""> ​  ​<br>作为DOM2 层级的className 是可以兼容所有低版本的浏览器，包括ie6以上，火狐2以上，Chrome 1以上等等。<br><img src="/static/images/2018-07-16/3.png" alt="">   ​<br>相对于上述的两个图，结论是在兼容IE浏览器，尤其是6，7，8，9版本的时候，需要使用className去添加类名，至于IE10、IE11也是部分支持。    </p>
+<h2 id="两者的兼容性"><a href="#两者的兼容性" class="headerlink" title="两者的兼容性"></a>两者的兼容性</h2><p>​ classList的兼容大部分的浏览器，但是对于IE9以下（包括IE9）是不支持的。<br><img src="/blog/static/images/2018-07-16/2.png" alt=""> ​  ​<br>作为DOM2 层级的className 是可以兼容所有低版本的浏览器，包括ie6以上，火狐2以上，Chrome 1以上等等。<br><img src="/blog/static/images/2018-07-16/3.png" alt="">   ​<br>相对于上述的两个图，结论是在兼容IE浏览器，尤其是6，7，8，9版本的时候，需要使用className去添加类名，至于IE10、IE11也是部分支持。    </p>
 <h2 id="拓展：关于减少reflow-重排-回流-和repaint（重绘）"><a href="#拓展：关于减少reflow-重排-回流-和repaint（重绘）" class="headerlink" title="拓展：关于减少reflow(重排|回流)和repaint（重绘）"></a>拓展：关于减少reflow(重排|回流)和repaint（重绘）</h2><p>​ 回到话题 <code>为什么要使用添加类名来改变当前元素的样式</code> ，因为这里是和<strong>回流与重绘</strong>有关系，即和<strong>内存消耗</strong>相关。 ​ 我们都知道浏览器在呈现一个页面的时候，会经过至少一次渲染，步骤如下：</p>
 <ol>
 <li><p>构建DOM树；</p>
@@ -137,7 +137,7 @@
 </li>
 </ol>
 <p>​ 由此可以知道，每当重新渲染的时候，也就是当DOM树和CSS树发生改变时，就会触发reflow和repaint，因此在操作DOM的时候，往往会引起reflow或者repaint。引起reflow和repaint主要是DOM发生改变，当然还有其它会·引起，例如改变浏览器窗口等等。</p>
-<p>如何肉眼观察到相应的改变？ 可以去使用开发者工具的 <code>layer</code><br><img src="/static/images/2018-07-16/4.jpg" alt=""><br>当我们想要去改变当前dom节点的时候，例如动态去改变当前元素的颜色、布局的时候，一般来说，常用的两种方式：</p>
+<p>如何肉眼观察到相应的改变？ 可以去使用开发者工具的 <code>layer</code><br><img src="/blog/static/images/2018-07-16/4.jpg" alt=""><br>当我们想要去改变当前dom节点的时候，例如动态去改变当前元素的颜色、布局的时候，一般来说，常用的两种方式：</p>
 <ol>
 <li><p>给元素一条条去添加样式，像<code>ele.style.css属性</code> 会形成一条条DOM改变。</p>
 </li>

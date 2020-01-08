@@ -102,21 +102,21 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>  <img src="/static/images/2017-08-13/6.png" alt="title">  </p>
+        <p>  <img src="/blog/static/images/2017-08-13/6.png" alt="title">  </p>
  <a id="more"></a> 
 <h1 id="手脚架是什么？"><a href="#手脚架是什么？" class="headerlink" title="手脚架是什么？"></a>手脚架是什么？</h1><p>众所周知，现在的前端项目发展得越渐越大，我们前端程序员要从0开始去搭建一套完整的项目很费时，<strong>所以这时候前端工程的手脚架就出现了</strong>。 我用得vue-cli也是其中之一，还有其他的我也说不清，我就说一下我接触比较多的这款vue-cli， 但是所有手脚架的核心：<strong>都是为了能够快速搭建一个完整的项目的结构，开发者只需要在生成的项目结构的基础上进行开发即可，非常简单高效</strong>。 然后，<strong> vue-cli 的脚手架项目模板有browserify 和 webpack</strong> ,<strong>vue-lic这个手脚架是把预定义的模板（存放在不同的服务器上）复制到本地作为项目初始结构，</strong> <strong>官网给出了两个模板： webpack-simple 和 webpack 两种。</strong> <strong>两种的区别在于webpack-simple 没有包括Eslint 检查功能等等功能，普通项目基本用webpack-simple 就足够了。</strong> 我用的是wbpack这个。 关于自己是否能搭建一套手脚架，这个是肯定的，只有自己写好模板，放在github上就OK了。在以后的项目搭建就可以使用自己搭建的手脚架了。  </p>
 <h1 id="vue-cli的使用"><a href="#vue-cli的使用" class="headerlink" title="vue-cli的使用"></a>vue-cli的使用</h1><p>在这里，由于我使用的代码编辑器是vs code，所以我就按着vs code的界面来展示； 下面讲到其他命令在其他的带有终端的代码编辑器也可以使用。  </p>
-<h2 id="第一步：安装vue-cli"><a href="#第一步：安装vue-cli" class="headerlink" title="第一步：安装vue-cli"></a>第一步：安装vue-cli</h2><p><code>**npm install -g vue-cli**</code> <img src="/static/images/2017-08-13/1.png" alt=""> 安装完成后，可以通过命令 vue list 查看有哪些模板可以调用； <img src="/static/images/2017-08-13/2.png" alt="">  </p>
+<h2 id="第一步：安装vue-cli"><a href="#第一步：安装vue-cli" class="headerlink" title="第一步：安装vue-cli"></a>第一步：安装vue-cli</h2><p><code>**npm install -g vue-cli**</code> <img src="/blog/static/images/2017-08-13/1.png" alt=""> 安装完成后，可以通过命令 vue list 查看有哪些模板可以调用； <img src="/blog/static/images/2017-08-13/2.png" alt="">  </p>
 <h2 id="第二步：搭建项目目录"><a href="#第二步：搭建项目目录" class="headerlink" title="第二步：搭建项目目录"></a>第二步：搭建项目目录</h2><p>命令格式：<code>vue init &lt;template-name&gt; &lt;project-name&gt;</code> <code>&lt;template-name&gt;：指上方的众多模板；</code></p>
 <pre><code>&lt;project-name&gt;： 指自己项目的名称；
-</code></pre><p>例如：我使用的是webpack这个模板：  vue init webpack vuetest <img src="/static/images/2017-08-13/3.png" alt=""></p>
+</code></pre><p>例如：我使用的是webpack这个模板：  vue init webpack vuetest <img src="/blog/static/images/2017-08-13/3.png" alt=""></p>
 <h2 id="第三步：安装依赖"><a href="#第三步：安装依赖" class="headerlink" title="第三步：安装依赖"></a>第三步：安装依赖</h2><p>进入新建立的文件夹里面：<br>命令格式：cd vuetest</p>
 <p>在文件夹里面去安装依赖<br>命令格式：npm install</p>
 <p><strong>注意：</strong><br>不用使用cnpm 淘宝这包管理器来安装依赖，这样会缺失比较多的东西；<br>虽然用npm去下载依赖很慢，毕竟连的是国外的链接；</p>
 <p>下面是以来所在的地方：</p>
-<p><img src="/static/images/2017-08-13/4.png" alt="">  </p>
+<p><img src="/blog/static/images/2017-08-13/4.png" alt="">  </p>
 <h2 id="第四步：直接运行"><a href="#第四步：直接运行" class="headerlink" title="第四步：直接运行"></a>第四步：直接运行</h2><p>命令格式：npm run dev 直接在终端里面输入这段命令就OK了； 默认是本地的8080端口：</p>
-<p> <img src="/static/images/2017-08-13/5.png" alt=""><br>  <img src="/static/images/2017-08-13/6.png" alt="">  </p>
+<p> <img src="/blog/static/images/2017-08-13/5.png" alt=""><br>  <img src="/blog/static/images/2017-08-13/6.png" alt="">  </p>
 <p> 到这里已经OK了! 使用webpage模板搭建的vue项目目录就OK了；  </p>
 <h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><p>在运行 npm run  dev 中可以使用  cnpm run dev 来代替。 其中</p>
 <h2 id="安装cnpm"><a href="#安装cnpm" class="headerlink" title="安装cnpm"></a>安装cnpm</h2><p>命令 npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>

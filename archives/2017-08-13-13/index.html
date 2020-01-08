@@ -102,7 +102,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <p><img src="/static/images/2017-08-13-13/title.png" alt=""></p>
+        <p><img src="/blog/static/images/2017-08-13-13/title.png" alt=""></p>
 <a id="more"></a>
 <h1 id="为什么使用Pm2"><a href="#为什么使用Pm2" class="headerlink" title="为什么使用Pm2"></a>为什么使用Pm2</h1><p>最近，在学习使用vue.js前端框架，计划写一套前端到后端都是javascript的webapp，技术栈是<strong>vue+node+mysql</strong>; 在写的过程中，自己用node写了一个简单服务器，用来<strong>连接前端后端的数据交互</strong>； <strong>前端：vue+vue-router+axios</strong> <strong>后端：node</strong> 问题：因为我这个程序是在本地运行，没有放上服务器，而且我是使用了vs code 这个代码编辑器，由于只有一个终端，在运行cnpm run dev 后，就不能让我自己编写的node.js来运行了，这时我需要一个能在后台运行并且能监控我自己编写的js文件能不能运行成功的东西。 所以选择了pm2这个node进程管理器；  </p>
 <h1 id="Pm2的使用（进程守护）"><a href="#Pm2的使用（进程守护）" class="headerlink" title="Pm2的使用（进程守护）"></a>Pm2的使用（进程守护）</h1><blockquote>
@@ -140,8 +140,8 @@
 <h3 id="CoffeeScript"><a href="#CoffeeScript" class="headerlink" title="CoffeeScript:"></a>CoffeeScript:</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pm2 start my_app.coffee  #这就是全部</span><br></pre></td></tr></table></figure>
 <h3 id="PM2-准备好为产品级服务了吗？"><a href="#PM2-准备好为产品级服务了吗？" class="headerlink" title="PM2 准备好为产品级服务了吗？"></a>PM2 准备好为产品级服务了吗？</h3><p>只需要在自己的服务器上测试</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https:<span class="comment">//github.com/Unitech/pm2.git</span></span><br><span class="line">$ cd pm2</span><br><span class="line">$ npm install  # 或者 npm install --dev ，如果devDependencies 没有安装</span><br><span class="line">$ npm test</span><br></pre></td></tr></table></figure>
-<p><code>pm2 list</code>：列出由 PM2 管理的所有进程信息，还会显示一个进程会被启动多少次，因为没处理的异常。<br><img src="/static/images/2017-08-13-13/1.jpg" alt="">   </p>
-<p><code>pm2 monit</code>：监视每个 node 进程的 CPU 和内存的使用情况。<br><img src="/static/images/2017-08-13-13/2.jpg" alt="">   </p>
+<p><code>pm2 list</code>：列出由 PM2 管理的所有进程信息，还会显示一个进程会被启动多少次，因为没处理的异常。<br><img src="/blog/static/images/2017-08-13-13/1.jpg" alt="">   </p>
+<p><code>pm2 monit</code>：监视每个 node 进程的 CPU 和内存的使用情况。<br><img src="/blog/static/images/2017-08-13-13/2.jpg" alt="">   </p>
 <h5 id="原文转载：https-segmentfault-com-a-1190000002539204"><a href="#原文转载：https-segmentfault-com-a-1190000002539204" class="headerlink" title="原文转载：https://segmentfault.com/a/1190000002539204"></a>原文转载：<a href="https://segmentfault.com/a/1190000002539204" target="_blank" rel="noopener">https://segmentfault.com/a/1190000002539204</a></h5>
       
     </div>
